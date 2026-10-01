@@ -40,7 +40,7 @@ const PLANS = [
   {
     name: "Usuário Independente",
     description:
-      "Treine e acompanhe sua própria evolução pelo app, sem vínculo com academia ou profissional.",
+      "Treine e acompanhe sua própria evolução pelo app, sem vínculo com profissional.",
     startingPrice: "14,90",
     startingNote: "cobrança mensal",
     studentNote: "Acesso completo ao aplicativo",
@@ -60,31 +60,31 @@ export default function PlansSection() {
     <section
       id="planos"
       data-snap
-      className="flex min-h-screen items-center border-t border-line bg-bg py-20 sm:py-28"
+      className="flex min-h-screen items-center border-t border-line bg-bg py-6 sm:py-8"
     >
       <Container>
         <Reveal className="max-w-2xl">
-          <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+          <h2 className="text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
             Planos para o seu negócio
           </h2>
-          <p className="mt-4 text-lg text-ink-muted">
+          <p className="mt-2 text-sm text-ink-muted sm:text-base">
             Você paga por vaga de aluno vinculado. O preço escala com o
             tamanho da sua base: quanto mais alunos, menor o custo por vaga.
           </p>
         </Reveal>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
+        <div className="mt-4 grid gap-4 lg:grid-cols-3">
           {PLANS.map((plan, i) => (
             <Reveal key={plan.name} delay={i * 80} className="h-full">
-              <div className="flex h-full flex-col rounded-2xl border border-line bg-surface p-8">
+              <div className="flex h-full flex-col rounded-2xl border border-line bg-surface p-5">
                 <span className="text-sm font-semibold uppercase tracking-wide text-accent">
                   {plan.name}
                 </span>
-                <p className="mt-3 text-sm leading-relaxed text-ink-muted">
+                <p className="mt-1 text-xs leading-relaxed text-ink-muted">
                   {plan.description}
                 </p>
 
-                <div className="mt-6">
+                <div className="mt-3">
                   <p className="text-xs font-medium text-ink-muted">
                     A partir de
                   </p>
@@ -92,25 +92,25 @@ export default function PlansSection() {
                     <span className="text-sm font-medium text-ink-muted">
                       R$
                     </span>
-                    <span className="text-4xl font-extrabold tracking-tight text-ink">
+                    <span className="text-2xl font-extrabold tracking-tight text-ink">
                       {plan.startingPrice}
                     </span>
                     <span className="text-sm font-medium text-ink-muted">
                       /mês
                     </span>
                   </div>
-                  <p className="mt-1 text-xs text-ink-muted">
+                  <p className="mt-0.5 text-xs text-ink-muted">
                     {plan.startingNote}
                   </p>
                 </div>
 
-                <div className="mt-5 flex min-h-[52px] items-center rounded-xl border border-line bg-surface-2 px-4 py-3">
+                <div className="mt-2 flex min-h-[40px] items-center rounded-xl border border-line bg-surface-2 px-3 py-2">
                   <p className="text-xs font-medium text-ink">
                     {plan.studentNote}
                   </p>
                 </div>
 
-                <details className="group mb-5 mt-5">
+                <details className="group mb-2 mt-2">
                   <summary className="flex cursor-pointer items-center gap-1.5 text-xs font-semibold text-accent">
                     Ver faixas de preço
                     <ChevronDown
@@ -118,7 +118,7 @@ export default function PlansSection() {
                       strokeWidth={2.5}
                     />
                   </summary>
-                  <div className="mt-3 flex flex-col gap-1.5">
+                  <div className="mt-2 flex flex-col gap-1.5">
                     {plan.tiers.map((tier) => (
                       <div
                         key={tier.range}
@@ -137,7 +137,7 @@ export default function PlansSection() {
 
                 <a
                   href="#contato"
-                  className={`mt-auto inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold transition-opacity hover:opacity-90 ${
+                  className={`mt-auto inline-flex items-center justify-center rounded-xl px-5 py-2 text-sm font-semibold transition-opacity hover:opacity-90 ${
                     plan.ctaVariant === "solid"
                       ? "bg-accent text-white"
                       : "border border-line text-ink transition-colors hover:bg-surface-2"
@@ -151,20 +151,22 @@ export default function PlansSection() {
         </div>
 
         <Reveal
-          delay={100}
+          delay={150}
           id="contato"
-          className="mt-20 flex flex-col items-center gap-6 rounded-2xl bg-gradient-accent-panel px-8 py-14 text-center sm:px-16"
+          className="mt-4 flex flex-col items-center gap-3 rounded-2xl bg-gradient-accent-panel px-6 py-5 text-center sm:flex-row sm:justify-between sm:text-left"
         >
-          <h3 className="max-w-2xl text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
-            Pronto para profissionalizar o atendimento dos seus alunos?
-          </h3>
-          <p className="max-w-xl text-white/80">
-            Agende uma demonstração e veja o ARKO funcionando com o seu
-            fluxo de trabalho.
-          </p>
+          <div>
+            <h3 className="text-lg font-extrabold tracking-tight text-white sm:text-xl">
+              Pronto para profissionalizar o atendimento dos seus alunos?
+            </h3>
+            <p className="mt-1 text-sm text-white/80">
+              Agende uma demonstração e veja o ARKO funcionando com o seu
+              fluxo de trabalho.
+            </p>
+          </div>
           <a
             href="mailto:contato@arkohealth.com.br"
-            className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-semibold text-black transition-opacity hover:opacity-90"
+            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-black transition-opacity hover:opacity-90"
           >
             Agende uma demonstração
             <ArrowRight className="h-4 w-4" strokeWidth={2.5} />

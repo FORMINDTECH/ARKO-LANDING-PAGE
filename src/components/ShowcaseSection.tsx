@@ -12,24 +12,24 @@ export default function ShowcaseSection() {
     <section
       id="produto"
       data-snap
-      className="flex min-h-screen items-center border-t border-line bg-bg py-20 sm:py-28"
+      className="flex min-h-screen items-center border-t border-line bg-bg py-6 sm:py-8"
     >
       <Container>
         <Reveal className="max-w-2xl">
           <span className="text-sm font-semibold uppercase tracking-wide text-accent">
             Veja o ARKO em ação
           </span>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+          <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
             Uma experiência premium para o seu aluno
           </h2>
-          <p className="mt-4 text-lg text-ink-muted">
+          <p className="mt-2 text-base text-ink-muted sm:text-lg">
             O ARKO tem identidade visual própria, pensada para elevar a
             percepção do seu atendimento, sem a complexidade de construir e
             manter um app.
           </p>
         </Reveal>
 
-        <div className="mt-14 flex flex-wrap items-start justify-center gap-8 py-4">
+        <div className="mt-4 flex flex-wrap items-start justify-center gap-6">
           <Reveal delay={0}>
             <PhoneMockup className="rotate-[-3deg]">
               <FeedScreen />
@@ -47,13 +47,15 @@ export default function ShowcaseSection() {
           </Reveal>
         </div>
 
-        <div className="mt-24 grid gap-10 border-t border-line pt-14 sm:grid-cols-3">
+        <div className="mt-6 grid gap-6 border-t border-line pt-4 sm:grid-cols-3">
           {STATS.map((stat, i) => (
             <Reveal key={stat.label} delay={i * 80} className="text-center">
-              <p className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+              <p className="text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
                 {stat.value}
               </p>
-              <p className="mt-2 text-sm text-ink-muted">{stat.label}</p>
+              <p className="mt-1 text-xs text-ink-muted sm:text-sm">
+                {stat.label}
+              </p>
             </Reveal>
           ))}
         </div>

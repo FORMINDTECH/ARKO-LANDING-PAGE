@@ -12,7 +12,7 @@ export default function Hero() {
       data-snap
       className="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden bg-radial-accent py-16 sm:py-24"
     >
-      <Container className="grid items-center gap-16 lg:grid-cols-2">
+      <Container className="relative z-10 grid items-center gap-16 lg:grid-cols-2">
         <Reveal>
           <Image
             src="/brand/arko-logo.png"
@@ -24,7 +24,7 @@ export default function Hero() {
           />
 
           <span className="mt-6 inline-flex items-center rounded-full border border-line bg-surface px-3 py-1 text-xs font-medium text-ink-muted">
-            Para personal trainers, nutricionistas e academias
+            Para personal trainers, nutricionistas e consultorias
           </span>
 
           <h1 className="mt-6 text-4xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-6xl">

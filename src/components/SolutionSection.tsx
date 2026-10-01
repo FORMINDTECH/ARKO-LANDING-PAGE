@@ -34,7 +34,7 @@ export default function SolutionSection() {
     <section
       id="solucao"
       data-snap
-      className="flex min-h-screen items-center border-t border-line bg-bg py-20 sm:py-28"
+      className="flex min-h-screen items-center border-t border-line bg-bg py-12 sm:py-16"
     >
       <Container>
         <Reveal className="max-w-2xl">
@@ -46,17 +46,17 @@ export default function SolutionSection() {
           </h2>
         </Reveal>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2">
           {FEATURES.map(({ icon: Icon, title, description }, i) => (
             <Reveal key={title} delay={i * 80}>
-              <div className="group h-full rounded-2xl border border-line bg-surface p-8 transition-colors hover:border-accent/40">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-accent-panel">
-                  <Icon className="h-6 w-6 text-white" strokeWidth={2} />
+              <div className="group h-full rounded-2xl border border-line bg-surface p-6 transition-colors hover:border-accent/40">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-accent-panel">
+                  <Icon className="h-5 w-5 text-white" strokeWidth={2} />
                 </div>
-                <h3 className="mt-6 text-xl font-bold tracking-tight text-ink">
+                <h3 className="mt-4 text-lg font-bold tracking-tight text-ink">
                   {title}
                 </h3>
-                <p className="mt-3 max-w-md text-[15px] leading-relaxed text-ink-muted">
+                <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-muted">
                   {description}
                 </p>
               </div>

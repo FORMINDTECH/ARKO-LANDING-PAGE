@@ -209,7 +209,7 @@ function PanelShell({
   children: ReactNode;
 }) {
   return (
-    <div className={`flex ${compact ? "h-[178px]" : "h-[360px]"} w-full text-ink`}>
+    <div className={`flex ${compact ? "h-[178px]" : "h-[300px]"} w-full text-ink`}>
       {!compact && (
         <div className="hidden w-[168px] shrink-0 flex-col gap-1 border-r border-line p-4 sm:flex">
           <div className="mb-3 flex items-center gap-2 text-ink-muted">

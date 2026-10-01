@@ -20,7 +20,7 @@ export default function PanelCarousel() {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-3">
       <div className="flex w-full items-center gap-3 sm:gap-6">
         <button
           type="button"

@@ -3,9 +3,10 @@
 import { useEffect, useRef } from "react";
 
 const HEADER_OFFSET = 64; // 4rem sticky header
-const ANIMATION_LOCK_MS = 650;
+const SCROLL_DURATION_MS = 850;
 const WHEEL_THRESHOLD = 12;
 const TRAVEL_EPSILON = 4;
+const MIN_POINT_GAP = 120; // ignore a bottom-aligned point too close to the section's top
 
 function isEditableTarget(target: EventTarget | null) {
   if (!(target instanceof HTMLElement)) return false;
@@ -18,16 +19,15 @@ function isEditableTarget(target: EventTarget | null) {
   );
 }
 
+function easeInOutCubic(t: number) {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
+
 export default function ScrollSnapController() {
   const isAnimating = useRef(false);
-  const unlockTimer = useRef<number | undefined>(undefined);
+  const rafRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReducedMotion) return;
-
     const getSnapPoints = () => {
       const sections = Array.from(
         document.querySelectorAll<HTMLElement>("section[data-snap]")
@@ -40,10 +40,15 @@ export default function ScrollSnapController() {
       points.add(0);
       sections.forEach((el) => {
         const top = Math.max(0, el.offsetTop - HEADER_OFFSET);
-        points.add(Math.min(top, maxScroll));
-        const bottomAligned = el.offsetTop + el.offsetHeight - vh;
-        if (el.offsetHeight > vh - HEADER_OFFSET) {
-          points.add(Math.max(0, Math.min(bottomAligned, maxScroll)));
+        const clampedTop = Math.min(top, maxScroll);
+        points.add(clampedTop);
+
+        const bottomAligned = Math.max(
+          0,
+          Math.min(el.offsetTop + el.offsetHeight - vh, maxScroll)
+        );
+        if (bottomAligned - clampedTop > MIN_POINT_GAP) {
+          points.add(bottomAligned);
         }
       });
 
@@ -52,11 +57,29 @@ export default function ScrollSnapController() {
 
     const goTo = (target: number) => {
       isAnimating.current = true;
-      window.scrollTo({ top: target, behavior: "smooth" });
-      window.clearTimeout(unlockTimer.current);
-      unlockTimer.current = window.setTimeout(() => {
-        isAnimating.current = false;
-      }, ANIMATION_LOCK_MS);
+      if (rafRef.current !== undefined) cancelAnimationFrame(rafRef.current);
+
+      const start = window.scrollY;
+      const distance = target - start;
+      const startTime = performance.now();
+
+      const tick = (now: number) => {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / SCROLL_DURATION_MS, 1);
+        const eased = easeInOutCubic(progress);
+        window.scrollTo({
+          top: start + distance * eased,
+          behavior: "instant" as ScrollBehavior,
+        });
+
+        if (progress < 1) {
+          rafRef.current = requestAnimationFrame(tick);
+        } else {
+          isAnimating.current = false;
+        }
+      };
+
+      rafRef.current = requestAnimationFrame(tick);
     };
 
     const step = (direction: 1 | -1) => {
@@ -105,7 +128,7 @@ export default function ScrollSnapController() {
     return () => {
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("keydown", onKeyDown);
-      window.clearTimeout(unlockTimer.current);
+      if (rafRef.current !== undefined) cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
