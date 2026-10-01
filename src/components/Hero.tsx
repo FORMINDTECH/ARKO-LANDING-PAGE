@@ -1,14 +1,29 @@
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import Container from "./Container";
 import PhoneMockup from "./PhoneMockup";
-import { AiWorkoutScreen } from "./MockupScreens";
+import MonitorMockup from "./MonitorMockup";
+import Reveal from "./Reveal";
+import { AiReportScreen, WebPanelScreen } from "./MockupScreens";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-radial-accent pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <section
+      data-snap
+      className="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden bg-radial-accent py-16 sm:py-24"
+    >
       <Container className="grid items-center gap-16 lg:grid-cols-2">
-        <div>
-          <span className="inline-flex items-center rounded-full border border-line bg-surface px-3 py-1 text-xs font-medium text-ink-muted">
+        <Reveal>
+          <Image
+            src="/brand/arko-logo.png"
+            alt="ARKO"
+            width={612}
+            height={230}
+            priority
+            className="h-14 w-auto sm:h-16"
+          />
+
+          <span className="mt-6 inline-flex items-center rounded-full border border-line bg-surface px-3 py-1 text-xs font-medium text-ink-muted">
             Para personal trainers, nutricionistas e academias
           </span>
 
@@ -19,9 +34,9 @@ export default function Hero() {
           </h1>
 
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink-muted">
-            ARKO é o app com IA que centraliza treinos, dietas e evolução dos
-            seus alunos, sem planilha, sem WhatsApp perdido. Menos tempo
-            administrando, mais tempo atendendo.
+            ARKO é o app que centraliza treinos, dietas e evolução dos seus
+            alunos e usa IA para transformar tudo isso em relatórios claros
+            para você e para o aluno. Sem planilha, sem WhatsApp perdido.
           </p>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -44,14 +59,20 @@ export default function Hero() {
             Já usado por profissionais para gerenciar treinos, dietas e
             evolução de centenas de alunos.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="relative flex justify-center lg:justify-end">
+        <Reveal
+          delay={120}
+          className="relative flex items-end justify-center gap-5 pb-8 lg:justify-end"
+        >
           <div className="pointer-events-none absolute -inset-x-10 -inset-y-10 -z-10 rounded-full bg-accent/20 blur-3xl" />
+          <MonitorMockup className="hidden w-[300px] xl:block">
+            <WebPanelScreen view="treinos" compact />
+          </MonitorMockup>
           <PhoneMockup>
-            <AiWorkoutScreen />
+            <AiReportScreen />
           </PhoneMockup>
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

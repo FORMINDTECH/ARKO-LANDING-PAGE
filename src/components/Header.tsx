@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Container from "./Container";
 
 const NAV_LINKS = [
-  { label: "Produto", href: "#produto" },
   { label: "Como funciona", href: "#solucao" },
+  { label: "Painel web", href: "#painel" },
+  { label: "Produto", href: "#produto" },
   { label: "Planos", href: "#planos" },
 ];
 
@@ -10,11 +12,15 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-line/60 bg-bg/80 backdrop-blur-md">
       <Container className="flex h-16 items-center justify-between">
-        <a href="#" className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-accent" />
-          <span className="text-lg font-extrabold tracking-tight text-ink">
-            ARKO
-          </span>
+        <a href="#" className="flex items-center">
+          <Image
+            src="/brand/arko-logo.png"
+            alt="ARKO"
+            width={612}
+            height={230}
+            priority
+            className="h-7 w-auto"
+          />
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">

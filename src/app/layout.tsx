@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "ARKO: Leve tecnologia de ponta para seus alunos",
   description:
-    "ARKO é o app de treino e nutrição com IA para personal trainers, nutricionistas e academias gerenciarem alunos, treinos e evolução em um só lugar.",
+    "ARKO é o app de treino e nutrição com relatórios de IA para personal trainers, nutricionistas e academias gerenciarem alunos, treinos e evolução em um só lugar.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

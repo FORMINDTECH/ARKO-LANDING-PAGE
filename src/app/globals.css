@@ -34,6 +34,13 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -65,4 +72,12 @@ body {
 
 .bg-gradient-accent-panel {
   background-image: linear-gradient(160deg, var(--color-accent-2) 0%, var(--color-accent-3) 55%, #0a0a0a 100%);
+}
+
+summary {
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
 }

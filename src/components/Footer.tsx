@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Container from "./Container";
 
 const SOCIAL_LINKS = [
@@ -29,15 +30,16 @@ export default function Footer() {
       <Container>
         <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
           <div className="max-w-xs">
-            <div className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-accent" />
-              <span className="text-lg font-extrabold tracking-tight text-ink">
-                ARKO
-              </span>
-            </div>
+            <Image
+              src="/brand/arko-logo.png"
+              alt="ARKO"
+              width={612}
+              height={230}
+              className="h-6 w-auto"
+            />
             <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-              Tecnologia de treino e nutrição com IA para profissionais que
-              gerenciam alunos e clientes.
+              Tecnologia de treino e nutrição com relatórios de IA para
+              profissionais que gerenciam alunos e clientes.
             </p>
             <div className="mt-5 flex items-center gap-4">
               {SOCIAL_LINKS.map((social) => (

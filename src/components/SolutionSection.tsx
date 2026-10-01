@@ -1,12 +1,13 @@
 import { LayoutDashboard, Sparkles, TrendingUp, Trophy } from "lucide-react";
 import Container from "./Container";
+import Reveal from "./Reveal";
 
 const FEATURES = [
   {
     icon: Sparkles,
-    title: "Treinos gerados por IA",
+    title: "Relatórios gerados por IA",
     description:
-      "A IA do ARKO monta o treino ideal com base no perfil, objetivo e histórico de cada aluno. Menos tempo montando planilha, mais tempo atendendo quem paga.",
+      "A IA do ARKO transforma treino, dieta e evolução em relatórios prontos para o aluno e para o profissional. Menos tempo interpretando dado solto, mais tempo atendendo quem paga.",
   },
   {
     icon: TrendingUp,
@@ -30,33 +31,36 @@ const FEATURES = [
 
 export default function SolutionSection() {
   return (
-    <section id="solucao" className="border-t border-line bg-bg py-20 sm:py-28">
+    <section
+      id="solucao"
+      data-snap
+      className="flex min-h-screen items-center border-t border-line bg-bg py-20 sm:py-28"
+    >
       <Container>
-        <div className="max-w-2xl">
+        <Reveal className="max-w-2xl">
           <span className="text-sm font-semibold uppercase tracking-wide text-accent">
             Como o ARKO resolve
           </span>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
             Uma plataforma para profissionalizar seu atendimento
           </h2>
-        </div>
+        </Reveal>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2">
-          {FEATURES.map(({ icon: Icon, title, description }) => (
-            <div
-              key={title}
-              className="group rounded-2xl border border-line bg-surface p-8 transition-colors hover:border-accent/40"
-            >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-accent-panel">
-                <Icon className="h-6 w-6 text-white" strokeWidth={2} />
+          {FEATURES.map(({ icon: Icon, title, description }, i) => (
+            <Reveal key={title} delay={i * 80}>
+              <div className="group h-full rounded-2xl border border-line bg-surface p-8 transition-colors hover:border-accent/40">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-accent-panel">
+                  <Icon className="h-6 w-6 text-white" strokeWidth={2} />
+                </div>
+                <h3 className="mt-6 text-xl font-bold tracking-tight text-ink">
+                  {title}
+                </h3>
+                <p className="mt-3 max-w-md text-[15px] leading-relaxed text-ink-muted">
+                  {description}
+                </p>
               </div>
-              <h3 className="mt-6 text-xl font-bold tracking-tight text-ink">
-                {title}
-              </h3>
-              <p className="mt-3 max-w-md text-[15px] leading-relaxed text-ink-muted">
-                {description}
-              </p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </Container>

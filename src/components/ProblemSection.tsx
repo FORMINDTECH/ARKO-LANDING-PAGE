@@ -1,5 +1,6 @@
 import { FileSpreadsheet, MessageCircleWarning, TrendingDown, UserX } from "lucide-react";
 import Container from "./Container";
+import Reveal from "./Reveal";
 
 const PAINS = [
   {
@@ -30,9 +31,12 @@ const PAINS = [
 
 export default function ProblemSection() {
   return (
-    <section className="border-t border-line bg-bg py-20 sm:py-28">
+    <section
+      data-snap
+      className="flex min-h-screen items-center border-t border-line bg-bg py-20 sm:py-28"
+    >
       <Container>
-        <div className="max-w-2xl">
+        <Reveal className="max-w-2xl">
           <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
             Gerenciar alunos não devia ser assim
           </h2>
@@ -41,22 +45,21 @@ export default function ProblemSection() {
             administrativas que não geram resultado, nem para o aluno, nem
             para o negócio.
           </p>
-        </div>
+        </Reveal>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {PAINS.map(({ icon: Icon, title, description }) => (
-            <div
-              key={title}
-              className="rounded-2xl border border-line bg-surface p-6"
-            >
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-surface-2">
-                <Icon className="h-5 w-5 text-danger" strokeWidth={2} />
+          {PAINS.map(({ icon: Icon, title, description }, i) => (
+            <Reveal key={title} delay={i * 80}>
+              <div className="h-full rounded-2xl border border-line bg-surface p-6">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-surface-2">
+                  <Icon className="h-5 w-5 text-danger" strokeWidth={2} />
+                </div>
+                <h3 className="mt-5 text-base font-bold text-ink">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                  {description}
+                </p>
               </div>
-              <h3 className="mt-5 text-base font-bold text-ink">{title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                {description}
-              </p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </Container>

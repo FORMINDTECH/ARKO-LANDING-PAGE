@@ -1,17 +1,21 @@
-import { Quote } from "lucide-react";
 import Container from "./Container";
 import PhoneMockup from "./PhoneMockup";
+import Reveal from "./Reveal";
 import {
-  DashboardScreen,
+  FeedScreen,
   GamificationScreen,
   ProgressScreen,
 } from "./MockupScreens";
 
 export default function ShowcaseSection() {
   return (
-    <section id="produto" className="border-t border-line bg-bg py-20 sm:py-28">
+    <section
+      id="produto"
+      data-snap
+      className="flex min-h-screen items-center border-t border-line bg-bg py-20 sm:py-28"
+    >
       <Container>
-        <div className="max-w-2xl">
+        <Reveal className="max-w-2xl">
           <span className="text-sm font-semibold uppercase tracking-wide text-accent">
             Veja o ARKO em ação
           </span>
@@ -23,48 +27,43 @@ export default function ShowcaseSection() {
             percepção do seu atendimento, sem a complexidade de construir e
             manter um app.
           </p>
+        </Reveal>
+
+        <div className="mt-14 flex flex-wrap items-start justify-center gap-8 py-4">
+          <Reveal delay={0}>
+            <PhoneMockup className="rotate-[-3deg]">
+              <FeedScreen />
+            </PhoneMockup>
+          </Reveal>
+          <Reveal delay={100}>
+            <PhoneMockup className="z-10 scale-105 shadow-black/80">
+              <ProgressScreen />
+            </PhoneMockup>
+          </Reveal>
+          <Reveal delay={200}>
+            <PhoneMockup className="rotate-[3deg]">
+              <GamificationScreen />
+            </PhoneMockup>
+          </Reveal>
         </div>
 
-        <div className="mt-14 flex flex-wrap items-start justify-center gap-8 overflow-x-auto py-4">
-          <PhoneMockup className="rotate-[-3deg]">
-            <DashboardScreen />
-          </PhoneMockup>
-          <PhoneMockup className="z-10 scale-105 shadow-black/80">
-            <ProgressScreen />
-          </PhoneMockup>
-          <PhoneMockup className="rotate-[3deg]">
-            <GamificationScreen />
-          </PhoneMockup>
-        </div>
-
-        <div className="mt-24 border-t border-line pt-14">
-          <h3 className="text-center text-sm font-semibold uppercase tracking-wide text-ink-muted">
-            Depoimentos em breve
-          </h3>
-          <div className="mt-8 grid gap-6 sm:grid-cols-3">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="rounded-2xl border border-dashed border-line bg-surface/50 p-6"
-              >
-                <Quote className="h-5 w-5 text-ink-muted/50" strokeWidth={2} />
-                <div className="mt-4 space-y-2">
-                  <div className="h-2.5 w-full rounded-full bg-surface-2" />
-                  <div className="h-2.5 w-4/5 rounded-full bg-surface-2" />
-                  <div className="h-2.5 w-3/5 rounded-full bg-surface-2" />
-                </div>
-                <div className="mt-6 flex items-center gap-3">
-                  <div className="h-9 w-9 rounded-full bg-surface-2" />
-                  <div className="space-y-1.5">
-                    <div className="h-2 w-20 rounded-full bg-surface-2" />
-                    <div className="h-2 w-14 rounded-full bg-surface-2" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="mt-24 grid gap-10 border-t border-line pt-14 sm:grid-cols-3">
+          {STATS.map((stat, i) => (
+            <Reveal key={stat.label} delay={i * 80} className="text-center">
+              <p className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+                {stat.value}
+              </p>
+              <p className="mt-2 text-sm text-ink-muted">{stat.label}</p>
+            </Reveal>
+          ))}
         </div>
       </Container>
     </section>
   );
 }
+
+const STATS = [
+  { value: "94%", label: "Retenção mensal de alunos ativos" },
+  { value: "IA", label: "Relatórios de evolução gerados sob medida" },
+  { value: "1 app", label: "Treino, dieta, evolução e feed em um só lugar" },
+];
