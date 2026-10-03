@@ -34,11 +34,10 @@ export default function WebSystemSection() {
   return (
     <section
       id="painel"
-      data-snap
-      className="flex min-h-screen items-center border-t border-line bg-bg py-4 sm:py-6"
+      className="flex min-h-screen items-center bg-bg py-4 sm:py-6"
     >
       <Container>
-        <Reveal className="max-w-2xl">
+        <Reveal direction="left" className="max-w-2xl">
           <span className="text-sm font-semibold uppercase tracking-wide text-accent">
             Painel web para profissionais
           </span>

@@ -11,11 +11,10 @@ export default function ShowcaseSection() {
   return (
     <section
       id="produto"
-      data-snap
-      className="flex min-h-screen items-center border-t border-line bg-bg py-6 sm:py-8"
+      className="relative flex min-h-screen items-center overflow-hidden bg-bg bg-radial-accent py-6 sm:py-8"
     >
       <Container>
-        <Reveal className="max-w-2xl">
+        <Reveal direction="left" className="max-w-2xl">
           <span className="text-sm font-semibold uppercase tracking-wide text-accent">
             Veja o ARKO em ação
           </span>

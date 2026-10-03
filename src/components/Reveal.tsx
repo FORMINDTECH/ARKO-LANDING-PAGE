@@ -2,15 +2,23 @@
 
 import { ReactNode, useEffect, useRef, useState } from "react";
 
+const HIDDEN_CLASS = {
+  up: "opacity-0 translate-y-8",
+  left: "opacity-0 -translate-x-12",
+  right: "opacity-0 translate-x-12",
+} as const;
+
 export default function Reveal({
   children,
   className = "",
   delay = 0,
+  direction = "up",
   id,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
+  direction?: "up" | "left" | "right";
   id?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -39,7 +47,9 @@ export default function Reveal({
       ref={ref}
       id={id}
       className={`transition-all duration-700 ease-out ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        visible
+          ? "opacity-100 translate-x-0 translate-y-0"
+          : HIDDEN_CLASS[direction]
       } ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >

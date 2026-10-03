@@ -33,14 +33,12 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 4rem;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+html.lenis,
+html.lenis body {
+  height: auto;
 }
 
 body {

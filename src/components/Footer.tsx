@@ -26,7 +26,7 @@ const COLUMNS = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-line bg-bg py-14">
+    <footer className="bg-bg py-14">
       <Container>
         <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
           <div className="max-w-xs">

@@ -36,10 +36,12 @@ export default function Header() {
         </nav>
 
         <a
-          href="#planos"
+          href="https://arko.formind.tech/"
+          target="_blank"
+          rel="noopener noreferrer"
           className="rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
         >
-          Agende uma demonstração
+          Comece agora mesmo
         </a>
       </Container>
     </header>

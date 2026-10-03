@@ -59,8 +59,7 @@ export default function PlansSection() {
   return (
     <section
       id="planos"
-      data-snap
-      className="flex min-h-screen items-center border-t border-line bg-bg py-6 sm:py-8"
+      className="flex min-h-screen items-center bg-bg py-6 sm:py-8"
     >
       <Container>
         <Reveal className="max-w-2xl">
@@ -160,15 +159,17 @@ export default function PlansSection() {
               Pronto para profissionalizar o atendimento dos seus alunos?
             </h3>
             <p className="mt-1 text-sm text-white/80">
-              Agende uma demonstração e veja o ARKO funcionando com o seu
-              fluxo de trabalho.
+              Crie sua conta e veja o ARKO funcionando com o seu fluxo de
+              trabalho.
             </p>
           </div>
           <a
-            href="mailto:contato@arkohealth.com.br"
+            href="https://arko.formind.tech/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-black transition-opacity hover:opacity-90"
           >
-            Agende uma demonstração
+            Comece agora mesmo
             <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
           </a>
         </Reveal>

@@ -9,11 +9,10 @@ import { AiReportScreen, WebPanelScreen } from "./MockupScreens";
 export default function Hero() {
   return (
     <section
-      data-snap
       className="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden bg-radial-accent py-16 sm:py-24"
     >
       <Container className="relative z-10 grid items-center gap-16 lg:grid-cols-2">
-        <Reveal>
+        <Reveal direction="left">
           <Image
             src="/brand/arko-logo.png"
             alt="ARKO"
@@ -41,10 +40,12 @@ export default function Hero() {
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
             <a
-              href="#planos"
+              href="https://arko.formind.tech/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
             >
-              Agende uma demonstração
+              Comece agora mesmo
               <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
             </a>
             <a
@@ -63,6 +64,7 @@ export default function Hero() {
 
         <Reveal
           delay={120}
+          direction="right"
           className="relative flex items-end justify-center gap-5 pb-8 lg:justify-end"
         >
           <div className="pointer-events-none absolute -inset-x-10 -inset-y-10 -z-10 rounded-full bg-accent/20 blur-3xl" />

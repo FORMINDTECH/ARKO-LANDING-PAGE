@@ -33,8 +33,7 @@ export default function SolutionSection() {
   return (
     <section
       id="solucao"
-      data-snap
-      className="flex min-h-screen items-center border-t border-line bg-bg py-12 sm:py-16"
+      className="relative flex min-h-screen items-center overflow-hidden bg-bg bg-radial-accent py-12 sm:py-16"
     >
       <Container>
         <Reveal className="max-w-2xl">

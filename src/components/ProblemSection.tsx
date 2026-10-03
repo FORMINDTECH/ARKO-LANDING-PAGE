@@ -32,8 +32,7 @@ const PAINS = [
 export default function ProblemSection() {
   return (
     <section
-      data-snap
-      className="flex min-h-screen items-center border-t border-line bg-bg py-20 sm:py-28"
+      className="flex min-h-screen items-center bg-bg py-20 sm:py-28"
     >
       <Container>
         <Reveal className="max-w-2xl">
