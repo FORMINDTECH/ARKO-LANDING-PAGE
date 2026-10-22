@@ -1,10 +1,10 @@
-import Image from "next/image";
 import Container from "./Container";
+import Logo from "./Logo";
 
 const SOCIAL_LINKS = [
   { label: "Instagram", href: "https://www.instagram.com/arkohealth" },
-  { label: "LinkedIn", href: "#" },
-  { label: "YouTube", href: "#" },
+  { label: "LinkedIn", href: "/" },
+  { label: "YouTube", href: "/" },
 ];
 
 const COLUMNS = [
@@ -18,7 +18,7 @@ const COLUMNS = [
   {
     title: "Empresa",
     links: [
-      { label: "Sobre", href: "#" },
+      { label: "Sobre", href: "/" },
       { label: "Contato", href: "#contato" },
     ],
   },
@@ -26,61 +26,57 @@ const COLUMNS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-bg py-14">
+    <footer className="bg-bg pb-10 pt-4">
       <Container>
-        <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
-          <div className="max-w-xs">
-            <Image
-              src="/brand/arko-logo.png"
-              alt="ARKO"
-              width={612}
-              height={230}
-              className="h-6 w-auto"
-            />
-            <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-              Tecnologia de treino e nutrição com relatórios de IA para
-              profissionais que gerenciam alunos e clientes.
-            </p>
-            <div className="mt-5 flex items-center gap-4">
-              {SOCIAL_LINKS.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target={social.href.startsWith("http") ? "_blank" : undefined}
-                  rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="text-sm text-ink-muted hover:text-ink"
-                >
-                  {social.label}
-                </a>
+        <div className="rounded-[24px] bg-surface-2 p-6 sm:p-8">
+          <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
+            <div className="max-w-xs">
+              <Logo className="h-6 w-auto" />
+              <p className="mt-3 text-sm leading-relaxed text-ink-muted">
+                Tecnologia de treino e nutrição com relatórios de IA para
+                profissionais que gerenciam alunos e clientes.
+              </p>
+              <div className="mt-5 flex items-center gap-4">
+                {SOCIAL_LINKS.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target={social.href.startsWith("http") ? "_blank" : undefined}
+                    rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="text-sm text-ink-muted hover:text-ink"
+                  >
+                    {social.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex gap-16">
+              {COLUMNS.map((col) => (
+                <div key={col.title}>
+                  <h4 className="text-sm font-semibold text-ink">{col.title}</h4>
+                  <ul className="mt-4 flex flex-col gap-2.5">
+                    {col.links.map((link) => (
+                      <li key={link.label}>
+                        <a
+                          href={link.href}
+                          className="text-sm text-ink-muted hover:text-ink"
+                        >
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
             </div>
           </div>
 
-          <div className="flex gap-16">
-            {COLUMNS.map((col) => (
-              <div key={col.title}>
-                <h4 className="text-sm font-semibold text-ink">{col.title}</h4>
-                <ul className="mt-4 flex flex-col gap-2.5">
-                  {col.links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="text-sm text-ink-muted hover:text-ink"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          <div className="mt-12 border-t border-line pt-6">
+            <p className="text-sm text-ink-muted">
+              © {new Date().getFullYear()} ARKO. Todos os direitos reservados.
+            </p>
           </div>
-        </div>
-
-        <div className="mt-12 border-t border-line pt-6">
-          <p className="text-xs text-ink-muted">
-            © {new Date().getFullYear()} ARKO. Todos os direitos reservados.
-          </p>
         </div>
       </Container>
     </footer>

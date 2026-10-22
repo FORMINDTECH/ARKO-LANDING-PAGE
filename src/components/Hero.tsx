@@ -1,34 +1,23 @@
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+"use client";
+
 import Container from "./Container";
 import PhoneMockup from "./PhoneMockup";
 import MonitorMockup from "./MonitorMockup";
 import Reveal from "./Reveal";
+import Logo from "./Logo";
+import Expandable from "./Expandable";
 import { AiReportScreen, WebPanelScreen } from "./MockupScreens";
 
 export default function Hero() {
   return (
-    <section
-      className="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden bg-radial-accent py-16 sm:py-24"
-    >
-      <Container className="relative z-10 grid items-center gap-16 lg:grid-cols-2">
-        <Reveal direction="left">
-          <Image
-            src="/brand/arko-logo.png"
-            alt="ARKO"
-            width={612}
-            height={230}
-            priority
-            className="h-14 w-auto sm:h-16"
-          />
-
-          <span className="mt-6 inline-flex items-center rounded-full border border-line bg-surface px-3 py-1 text-xs font-medium text-ink-muted">
-            Para personal trainers, nutricionistas e consultorias
-          </span>
+    <section className="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden bg-bg py-16 sm:py-24">
+      <Container className="relative z-10 pointer-events-none">
+        <Reveal direction="left" className="pointer-events-auto max-w-2xl">
+          <Logo className="h-14 w-auto sm:h-16" />
 
           <h1 className="mt-6 text-4xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-6xl">
             Leve tecnologia{" "}
-            <span className="text-gradient-accent">de ponta</span> para seus
+            <span className="text-accent">de ponta</span> para seus
             alunos
           </h1>
 
@@ -43,14 +32,13 @@ export default function Hero() {
               href="https://arko.formind.tech/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+              className="btn-primary inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-sm font-semibold"
             >
               Comece agora mesmo
-              <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
             </a>
             <a
               href="#solucao"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-line px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-surface"
+              className="btn-secondary inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-sm font-semibold"
             >
               Ver como funciona
             </a>
@@ -61,21 +49,34 @@ export default function Hero() {
             evolução de centenas de alunos.
           </p>
         </Reveal>
+      </Container>
 
+      <div className="pointer-events-none absolute inset-y-0 left-[56%] z-0 hidden items-center lg:flex">
         <Reveal
           delay={120}
           direction="right"
-          className="relative flex items-end justify-center gap-5 pb-8 lg:justify-end"
+          className="pointer-events-auto relative flex items-center"
         >
           <div className="pointer-events-none absolute -inset-x-10 -inset-y-10 -z-10 rounded-full bg-accent/20 blur-3xl" />
-          <MonitorMockup className="hidden w-[300px] xl:block">
-            <WebPanelScreen view="treinos" compact />
-          </MonitorMockup>
-          <PhoneMockup>
-            <AiReportScreen />
-          </PhoneMockup>
+          <Expandable triggerClassName="z-10 mt-16 sm:mt-20">
+            {(expanded) => (
+              <PhoneMockup size={expanded ? "lg" : "default"}>
+                <AiReportScreen />
+              </PhoneMockup>
+            )}
+          </Expandable>
+          <Expandable triggerClassName="hidden -ml-16 -mt-20 sm:-ml-24 sm:-mt-28 xl:block">
+            {(expanded) => (
+              <MonitorMockup
+                className={expanded ? "w-[900px]" : "w-[820px] 2xl:w-[980px]"}
+                aspectRatio="4 / 3"
+              >
+                <WebPanelScreen view="treinos" />
+              </MonitorMockup>
+            )}
+          </Expandable>
         </Reveal>
-      </Container>
+      </div>
     </section>
   );
 }

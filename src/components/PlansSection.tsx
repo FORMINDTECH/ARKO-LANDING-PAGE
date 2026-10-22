@@ -1,46 +1,38 @@
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import Container from "./Container";
 import Reveal from "./Reveal";
 
 const PLANS = [
   {
     name: "Personal & Nutricionista",
-    description:
-      "Monte treino ou dieta pelo painel web e acompanhe cada aluno vinculado em tempo real.",
     startingPrice: "49,90",
-    startingNote: "até 5 vagas",
-    studentNote: "Aluno paga a partir de R$ 4,90/mês",
+    startingNote: "até 19 vagas",
+    studentNote: "Sem custo para o aluno vinculado",
     tiers: [
-      { range: "1 a 5 vagas", price: "49,90/mês" },
-      { range: "6 a 19 vagas", price: "a partir de 49,90/mês" },
+      { range: "1 a 19 vagas", price: "a partir de 49,90/mês" },
       { range: "20 a 49 vagas", price: "a partir de 179,90/mês" },
       { range: "50 a 99 vagas", price: "a partir de 449,90/mês" },
       { range: "100+ vagas", price: "a partir de 890,90/mês" },
     ],
     cta: "Começar agora",
-    ctaVariant: "solid" as const,
+    highlighted: false,
   },
   {
     name: "Consultoria",
-    description:
-      "Para quem oferece acompanhamento completo, com acesso completo à plataforma.",
     startingPrice: "59,90",
-    startingNote: "até 5 vagas",
-    studentNote: "Aluno paga a partir de R$ 8,90/mês",
+    startingNote: "até 19 vagas",
+    studentNote: "Sem custo para o aluno vinculado",
     tiers: [
-      { range: "1 a 5 vagas", price: "59,90/mês" },
-      { range: "6 a 19 vagas", price: "a partir de 59,90/mês" },
+      { range: "1 a 19 vagas", price: "a partir de 59,90/mês" },
       { range: "20 a 49 vagas", price: "a partir de 215,90/mês" },
       { range: "50 a 99 vagas", price: "a partir de 539,90/mês" },
       { range: "100+ vagas", price: "a partir de 1.068,90/mês" },
     ],
     cta: "Começar agora",
-    ctaVariant: "outline" as const,
+    highlighted: true,
   },
   {
     name: "Usuário Independente",
-    description:
-      "Treine e acompanhe sua própria evolução pelo app, sem vínculo com profissional.",
     startingPrice: "14,90",
     startingNote: "cobrança mensal",
     studentNote: "Acesso completo ao aplicativo",
@@ -51,66 +43,65 @@ const PLANS = [
       { range: "Anual", price: "129,90 a cada 12 meses" },
     ],
     cta: "Quero assinar",
-    ctaVariant: "outline" as const,
+    highlighted: false,
   },
 ];
 
 export default function PlansSection() {
   return (
-    <section
-      id="planos"
-      className="flex min-h-screen items-center bg-bg py-6 sm:py-8"
-    >
+    <section id="planos" className="bg-bg py-16 sm:py-20">
       <Container>
         <Reveal className="max-w-2xl">
-          <h2 className="text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
+          <h2 className="text-2xl font-extrabold tracking-tight text-ink sm:text-3xl lg:text-4xl">
             Planos para o seu negócio
           </h2>
-          <p className="mt-2 text-sm text-ink-muted sm:text-base">
+          <p className="mt-3 text-base text-ink-muted sm:text-lg">
             Você paga por vaga de aluno vinculado. O preço escala com o
             tamanho da sua base: quanto mais alunos, menor o custo por vaga.
           </p>
         </Reveal>
 
-        <div className="mt-4 grid gap-4 lg:grid-cols-3">
+        <div className="mt-8 grid gap-4 rounded-[24px] bg-surface-2 p-3 lg:grid-cols-3">
           {PLANS.map((plan, i) => (
             <Reveal key={plan.name} delay={i * 80} className="h-full">
-              <div className="flex h-full flex-col rounded-2xl border border-line bg-surface p-5">
-                <span className="text-sm font-semibold uppercase tracking-wide text-accent">
+              <div
+                className={`relative flex h-full flex-col rounded-2xl p-7 ${
+                  plan.highlighted ? "card-inset ring-2 ring-accent" : "card-inset"
+                }`}
+              >
+                {plan.highlighted && (
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">
+                    Mais popular
+                  </span>
+                )}
+
+                <span className="text-base font-semibold uppercase tracking-wide text-accent">
                   {plan.name}
                 </span>
-                <p className="mt-1 text-xs leading-relaxed text-ink-muted">
-                  {plan.description}
+
+                <div className="mt-4 flex items-baseline gap-1.5">
+                  <span className="text-base font-medium text-ink-muted">
+                    R$
+                  </span>
+                  <span className="font-data text-4xl font-semibold tracking-tight text-ink">
+                    {plan.startingPrice}
+                  </span>
+                  <span className="text-base font-medium text-ink-muted">
+                    /mês
+                  </span>
+                </div>
+                <p className="mt-1 text-sm text-ink-muted">
+                  {plan.startingNote}
                 </p>
 
-                <div className="mt-3">
-                  <p className="text-xs font-medium text-ink-muted">
-                    A partir de
-                  </p>
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-sm font-medium text-ink-muted">
-                      R$
-                    </span>
-                    <span className="text-2xl font-extrabold tracking-tight text-ink">
-                      {plan.startingPrice}
-                    </span>
-                    <span className="text-sm font-medium text-ink-muted">
-                      /mês
-                    </span>
-                  </div>
-                  <p className="mt-0.5 text-xs text-ink-muted">
-                    {plan.startingNote}
-                  </p>
-                </div>
-
-                <div className="mt-2 flex min-h-[40px] items-center rounded-xl border border-line bg-surface-2 px-3 py-2">
-                  <p className="text-xs font-medium text-ink">
+                <div className="mt-4 flex min-h-[48px] items-center rounded-xl border border-line bg-surface-2 px-4 py-3">
+                  <p className="text-sm font-medium text-ink">
                     {plan.studentNote}
                   </p>
                 </div>
 
-                <details className="group mb-2 mt-2">
-                  <summary className="flex cursor-pointer items-center gap-1.5 text-xs font-semibold text-accent">
+                <details className="group my-3">
+                  <summary className="flex cursor-pointer items-center gap-1.5 text-sm font-semibold text-accent">
                     Ver faixas de preço
                     <ChevronDown
                       className="h-3.5 w-3.5 transition-transform group-open:rotate-180"
@@ -123,10 +114,10 @@ export default function PlansSection() {
                         key={tier.range}
                         className="flex items-center justify-between rounded-lg border border-line px-3 py-2"
                       >
-                        <span className="text-xs text-ink-muted">
+                        <span className="text-sm text-ink-muted">
                           {tier.range}
                         </span>
-                        <span className="text-xs font-semibold text-ink">
+                        <span className="font-data text-sm font-semibold text-ink">
                           R$ {tier.price}
                         </span>
                       </div>
@@ -136,11 +127,7 @@ export default function PlansSection() {
 
                 <a
                   href="#contato"
-                  className={`mt-auto inline-flex items-center justify-center rounded-xl px-5 py-2 text-sm font-semibold transition-opacity hover:opacity-90 ${
-                    plan.ctaVariant === "solid"
-                      ? "bg-accent text-white"
-                      : "border border-line text-ink transition-colors hover:bg-surface-2"
-                  }`}
+                  className="btn-primary mt-auto inline-flex items-center justify-center rounded-xl px-5 py-3 text-base font-semibold"
                 >
                   {plan.cta}
                 </a>
@@ -152,13 +139,13 @@ export default function PlansSection() {
         <Reveal
           delay={150}
           id="contato"
-          className="mt-4 flex flex-col items-center gap-3 rounded-2xl bg-gradient-accent-panel px-6 py-5 text-center sm:flex-row sm:justify-between sm:text-left"
+          className="mt-4 flex flex-col items-center gap-3 rounded-2xl border border-accent/30 bg-surface-2 px-6 py-5 text-center sm:flex-row sm:justify-between sm:text-left"
         >
           <div>
-            <h3 className="text-lg font-extrabold tracking-tight text-white sm:text-xl">
+            <h3 className="text-lg font-extrabold tracking-tight text-ink sm:text-xl">
               Pronto para profissionalizar o atendimento dos seus alunos?
             </h3>
-            <p className="mt-1 text-sm text-white/80">
+            <p className="mt-1 text-sm text-ink-muted">
               Crie sua conta e veja o ARKO funcionando com o seu fluxo de
               trabalho.
             </p>
@@ -167,10 +154,9 @@ export default function PlansSection() {
             href="https://arko.formind.tech/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-black transition-opacity hover:opacity-90"
+            className="btn-primary inline-flex shrink-0 items-center rounded-xl px-6 py-3 text-sm font-semibold"
           >
             Comece agora mesmo
-            <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
           </a>
         </Reveal>
       </Container>

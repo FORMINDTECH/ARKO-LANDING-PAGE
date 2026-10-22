@@ -4,15 +4,24 @@ import { Signal, Wifi, BatteryFull } from "lucide-react";
 export default function PhoneMockup({
   children,
   className = "",
+  size = "default",
 }: {
   children: ReactNode;
   className?: string;
+  size?: "default" | "lg" | "xl";
 }) {
+  const width =
+    size === "xl"
+      ? "w-[340px] sm:w-[400px]"
+      : size === "lg"
+        ? "w-[300px] sm:w-[360px]"
+        : "w-[240px]";
+
   return (
     <div className="group relative shrink-0">
       <div className="pointer-events-none absolute -inset-8 -z-10 rounded-[48px] bg-accent/0 blur-2xl transition-colors duration-500 ease-out group-hover:bg-accent/30" />
       <div
-        className={`relative w-[240px] rounded-[32px] border border-line bg-surface-2 p-2 shadow-2xl shadow-black/60 transition-transform duration-500 ease-out group-hover:-translate-y-1.5 ${className}`}
+        className={`relative ${width} rounded-[32px] border border-line bg-surface-2 p-2 shadow-2xl shadow-black/60 transition-transform duration-500 ease-out group-hover:-translate-y-1.5 ${className}`}
       >
         <div className="absolute left-1/2 top-3 z-10 h-1.5 w-14 -translate-x-1/2 rounded-full bg-black/60" />
         <div className="relative overflow-hidden rounded-[24px] bg-bg">

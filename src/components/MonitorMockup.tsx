@@ -3,9 +3,11 @@ import { ReactNode } from "react";
 export default function MonitorMockup({
   children,
   className = "",
+  aspectRatio,
 }: {
   children: ReactNode;
   className?: string;
+  aspectRatio?: string;
 }) {
   return (
     <div className={`group relative ${className}`}>
@@ -18,11 +20,13 @@ export default function MonitorMockup({
             <span className="h-2 w-2 rounded-full bg-accent/70" />
             <span className="h-2 w-2 rounded-full bg-success/70" />
           </div>
-          <div className="overflow-hidden rounded-lg bg-bg">{children}</div>
+          <div
+            className="overflow-hidden rounded-lg bg-bg"
+            style={aspectRatio ? { aspectRatio } : undefined}
+          >
+            {children}
+          </div>
         </div>
-
-        <div className="mx-auto h-4 w-16 bg-surface-2" />
-        <div className="mx-auto h-2 w-28 rounded-full bg-line" />
       </div>
     </div>
   );

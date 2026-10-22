@@ -9,7 +9,7 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
       root
       options={{
         duration: 1.5,
-        anchors: { offset: -64 },
+        anchors: { offset: -80 },
       }}
     >
       {children}

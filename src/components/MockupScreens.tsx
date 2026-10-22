@@ -30,7 +30,7 @@ export function FeedScreen() {
             className="flex flex-col gap-2 rounded-xl border border-line bg-surface p-3"
           >
             <div className="flex items-center gap-2">
-              <div className="h-7 w-7 shrink-0 rounded-full bg-gradient-accent-panel" />
+              <div className="h-7 w-7 shrink-0 rounded-full bg-accent-panel" />
               <p className="text-[11px] font-semibold text-ink">{p.name}</p>
             </div>
             <p className="text-[10px] leading-snug text-ink-muted">{p.text}</p>
@@ -69,7 +69,7 @@ export function AiReportScreen({ compact = false }: { compact?: boolean }) {
         compact ? "h-[260px]" : "h-[392px]"
       } w-[224px] flex-col gap-4 p-4`}
     >
-      <div className="flex items-center gap-2 rounded-xl bg-gradient-accent-panel p-3">
+      <div className="flex items-center gap-2 rounded-xl bg-accent-panel p-3">
         <Sparkles className="h-4 w-4 text-white" strokeWidth={2} />
         <p className="text-[11px] font-semibold text-white">
           Relatório gerado por IA
@@ -257,7 +257,7 @@ function PanelShell({
         {children}
 
         {!compact && (
-          <div className="mt-auto flex items-center justify-between rounded-xl bg-gradient-accent-panel px-4 py-3">
+          <div className="mt-auto flex items-center justify-between rounded-xl bg-accent-panel px-4 py-3">
             <span className="text-[11px] font-semibold text-white">
               Publicar no app da aluna
             </span>
@@ -364,7 +364,7 @@ export function WebPanelScreen({
               key={s.name}
               className="flex items-center gap-3 rounded-lg border border-line bg-surface px-3 py-2"
             >
-              <div className="h-6 w-6 shrink-0 rounded-full bg-gradient-accent-panel" />
+              <div className="h-6 w-6 shrink-0 rounded-full bg-accent-panel" />
               <div className="flex-1">
                 <p className="text-[11px] font-semibold text-ink">{s.name}</p>
                 <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-surface-2">
