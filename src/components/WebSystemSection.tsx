@@ -51,8 +51,14 @@ export default function WebSystemSection() {
           </p>
         </Reveal>
 
-        <div className="mt-8 grid items-start gap-6 lg:grid-cols-2">
-          <Reveal className="flex flex-col gap-2 rounded-[24px] bg-surface-2 p-2">
+        <div
+          className="mt-8 grid items-start gap-6 lg:grid-cols-2"
+          style={{ contain: "content" }}
+        >
+          <Reveal
+            className="flex flex-col gap-2 rounded-[24px] bg-surface-2 p-2"
+            style={{ contain: "content" }}
+          >
             {STEPS.map(({ icon: Icon, title, description }, i) => {
               const isActive = activeIndex === i;
               return (
@@ -64,6 +70,7 @@ export default function WebSystemSection() {
                   onMouseEnter={() => setActiveIndex(i)}
                   onFocus={() => setActiveIndex(i)}
                   className="relative cursor-pointer overflow-hidden rounded-2xl bg-surface p-5 pl-7 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  style={{ contain: "content" }}
                 >
                   <span
                     className={`absolute inset-y-3 left-2 w-1 rounded-full bg-accent transition-transform duration-300 ease-out ${
@@ -92,15 +99,14 @@ export default function WebSystemSection() {
                     </h3>
                   </div>
                   <div
-                    className={`grid transition-[grid-template-rows] duration-500 ease-out ${
-                      isActive
-                        ? "mt-4 grid-rows-[1fr] delay-0"
-                        : "grid-rows-[0fr] delay-150"
+                    className={`mt-4 grid transition-[grid-template-rows] duration-300 ease-out ${
+                      isActive ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                     }`}
+                    style={{ willChange: "grid-template-rows", contain: "content" }}
                   >
                     <p
-                      className={`overflow-hidden pl-0 text-sm leading-relaxed text-ink-muted transition-opacity duration-300 ease-out sm:pl-[60px] ${
-                        isActive ? "opacity-100 delay-200" : "opacity-0 delay-0"
+                      className={`overflow-hidden pl-0 text-sm leading-relaxed text-ink-muted transition-opacity duration-200 ease-out sm:pl-[60px] ${
+                        isActive ? "opacity-100 delay-100" : "opacity-0"
                       }`}
                     >
                       {description}

@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { CSSProperties, ReactNode, useEffect, useRef, useState } from "react";
 
 const HIDDEN_CLASS = {
   up: "opacity-0 translate-y-8",
@@ -14,12 +14,14 @@ export default function Reveal({
   delay = 0,
   direction = "up",
   id,
+  style,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   direction?: "up" | "left" | "right";
   id?: string;
+  style?: CSSProperties;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -51,7 +53,7 @@ export default function Reveal({
           ? "opacity-100 translate-x-0 translate-y-0"
           : HIDDEN_CLASS[direction]
       } ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ transitionDelay: `${delay}ms`, ...style }}
     >
       {children}
     </div>

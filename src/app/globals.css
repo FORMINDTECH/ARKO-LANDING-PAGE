@@ -187,40 +187,16 @@ summary::-webkit-details-marker {
 
 
 .btn-primary {
-  background-color: #0a0a0a;
-  color: var(--color-accent);
-  border: 2px solid var(--color-accent);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  background: var(--color-surface);
+  border: 2px solid var(--color-line);
+  color: var(--color-ink);
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .btn-primary:hover,
 .btn-primary:focus-visible {
-  background-color: var(--color-accent);
-  color: #fff;
-}
-
-:root[data-theme="light"] .btn-primary {
-  background-color: var(--color-accent);
-  color: #fff;
-}
-
-:root[data-theme="light"] .btn-primary:hover,
-:root[data-theme="light"] .btn-primary:focus-visible {
-  background-color: #0a0a0a;
+  border-color: var(--color-accent);
   color: var(--color-accent);
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme]) .btn-primary {
-    background-color: var(--color-accent);
-    color: #fff;
-  }
-
-  :root:not([data-theme]) .btn-primary:hover,
-  :root:not([data-theme]) .btn-primary:focus-visible {
-    background-color: #0a0a0a;
-    color: var(--color-accent);
-  }
 }
 
 .btn-secondary {
