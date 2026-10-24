@@ -16,8 +16,8 @@ export default function Home() {
       <main className="flex-1 pt-24 sm:pt-28">
         <Hero />
         <ProblemSection />
-        <SolutionSection />
         <WebSystemSection />
+        <SolutionSection />
         <ShowcaseSection />
         <TestimonialsSection />
         <PlansSection />

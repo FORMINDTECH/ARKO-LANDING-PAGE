@@ -1,6 +1,10 @@
-import { ChevronDown } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import Container from "./Container";
 import Reveal from "./Reveal";
+import SlideSwap from "./SlideSwap";
 
 const PLANS = [
   {
@@ -47,7 +51,80 @@ const PLANS = [
   },
 ];
 
+type Plan = (typeof PLANS)[number];
+
+function PlanCard({ plan }: { plan: Plan }) {
+  return (
+    <div
+      className={`relative flex h-full flex-col rounded-2xl p-7 ${
+        plan.highlighted ? "card-inset ring-2 ring-accent" : "card-inset"
+      }`}
+    >
+      {plan.highlighted && (
+        <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">
+          Mais popular
+        </span>
+      )}
+
+      <span className="text-base font-semibold uppercase tracking-wide text-accent">
+        {plan.name}
+      </span>
+
+      <div className="mt-4 flex items-baseline gap-1.5">
+        <span className="text-base font-medium text-ink-muted">R$</span>
+        <span className="font-data text-4xl font-semibold tracking-tight text-ink">
+          {plan.startingPrice}
+        </span>
+        <span className="text-base font-medium text-ink-muted">/mês</span>
+      </div>
+      <p className="mt-1 text-sm text-ink-muted">{plan.startingNote}</p>
+
+      <div className="mt-4 flex min-h-[48px] items-center rounded-xl border border-line bg-surface-2 px-4 py-3">
+        <p className="text-sm font-medium text-ink">{plan.studentNote}</p>
+      </div>
+
+      <details className="group my-3">
+        <summary className="flex cursor-pointer items-center gap-1.5 text-sm font-semibold text-accent">
+          Ver faixas de preço
+          <ChevronDown
+            className="h-3.5 w-3.5 transition-transform group-open:rotate-180"
+            strokeWidth={2.5}
+          />
+        </summary>
+        <div className="mt-2 flex flex-col gap-1.5">
+          {plan.tiers.map((tier) => (
+            <div
+              key={tier.range}
+              className="flex items-center justify-between rounded-lg border border-line px-3 py-2"
+            >
+              <span className="text-sm text-ink-muted">{tier.range}</span>
+              <span className="font-data text-sm font-semibold text-ink">
+                R$ {tier.price}
+              </span>
+            </div>
+          ))}
+        </div>
+      </details>
+
+      <a
+        href="#contato"
+        className="btn-primary mt-auto inline-flex items-center justify-center rounded-xl px-5 py-3 text-base font-semibold"
+      >
+        {plan.cta}
+      </a>
+    </div>
+  );
+}
+
 export default function PlansSection() {
+  const [activePlan, setActivePlan] = useState(0);
+  const [direction, setDirection] = useState(1);
+
+  const goTo = (i: number, dir: number) => {
+    setDirection(dir);
+    setActivePlan(i);
+  };
+
   return (
     <section id="planos" className="bg-bg py-16 sm:py-20">
       <Container>
@@ -61,77 +138,56 @@ export default function PlansSection() {
           </p>
         </Reveal>
 
-        <div className="mt-8 grid gap-4 rounded-[24px] bg-surface-2 p-3 lg:grid-cols-3">
+        <div className="mt-8 lg:hidden">
+          <div className="flex items-center gap-2 rounded-[24px] bg-surface-2 p-3">
+            <button
+              type="button"
+              aria-label="Plano anterior"
+              onClick={() =>
+                goTo((activePlan - 1 + PLANS.length) % PLANS.length, -1)
+              }
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line bg-surface text-ink-muted transition-colors hover:text-ink"
+            >
+              <ChevronLeft className="h-5 w-5" strokeWidth={2.25} />
+            </button>
+
+            <SlideSwap
+              itemKey={activePlan}
+              direction={direction}
+              className="min-w-0 flex-1"
+            >
+              <PlanCard plan={PLANS[activePlan]} />
+            </SlideSwap>
+
+            <button
+              type="button"
+              aria-label="Próximo plano"
+              onClick={() => goTo((activePlan + 1) % PLANS.length, 1)}
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line bg-surface text-ink-muted transition-colors hover:text-ink"
+            >
+              <ChevronRight className="h-5 w-5" strokeWidth={2.25} />
+            </button>
+          </div>
+
+          <div className="mt-3 flex items-center justify-center gap-1.5">
+            {PLANS.map((plan, i) => (
+              <button
+                key={plan.name}
+                type="button"
+                aria-label={plan.name}
+                onClick={() => goTo(i, i > activePlan ? 1 : -1)}
+                className={`h-1.5 rounded-full transition-all ${
+                  i === activePlan ? "w-6 bg-accent" : "w-1.5 bg-line"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-8 hidden gap-4 rounded-[24px] bg-surface-2 p-3 lg:grid lg:grid-cols-3">
           {PLANS.map((plan, i) => (
             <Reveal key={plan.name} delay={i * 80} className="h-full">
-              <div
-                className={`relative flex h-full flex-col rounded-2xl p-7 ${
-                  plan.highlighted ? "card-inset ring-2 ring-accent" : "card-inset"
-                }`}
-              >
-                {plan.highlighted && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">
-                    Mais popular
-                  </span>
-                )}
-
-                <span className="text-base font-semibold uppercase tracking-wide text-accent">
-                  {plan.name}
-                </span>
-
-                <div className="mt-4 flex items-baseline gap-1.5">
-                  <span className="text-base font-medium text-ink-muted">
-                    R$
-                  </span>
-                  <span className="font-data text-4xl font-semibold tracking-tight text-ink">
-                    {plan.startingPrice}
-                  </span>
-                  <span className="text-base font-medium text-ink-muted">
-                    /mês
-                  </span>
-                </div>
-                <p className="mt-1 text-sm text-ink-muted">
-                  {plan.startingNote}
-                </p>
-
-                <div className="mt-4 flex min-h-[48px] items-center rounded-xl border border-line bg-surface-2 px-4 py-3">
-                  <p className="text-sm font-medium text-ink">
-                    {plan.studentNote}
-                  </p>
-                </div>
-
-                <details className="group my-3">
-                  <summary className="flex cursor-pointer items-center gap-1.5 text-sm font-semibold text-accent">
-                    Ver faixas de preço
-                    <ChevronDown
-                      className="h-3.5 w-3.5 transition-transform group-open:rotate-180"
-                      strokeWidth={2.5}
-                    />
-                  </summary>
-                  <div className="mt-2 flex flex-col gap-1.5">
-                    {plan.tiers.map((tier) => (
-                      <div
-                        key={tier.range}
-                        className="flex items-center justify-between rounded-lg border border-line px-3 py-2"
-                      >
-                        <span className="text-sm text-ink-muted">
-                          {tier.range}
-                        </span>
-                        <span className="font-data text-sm font-semibold text-ink">
-                          R$ {tier.price}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </details>
-
-                <a
-                  href="#contato"
-                  className="btn-primary mt-auto inline-flex items-center justify-center rounded-xl px-5 py-3 text-base font-semibold"
-                >
-                  {plan.cta}
-                </a>
-              </div>
+              <PlanCard plan={plan} />
             </Reveal>
           ))}
         </div>

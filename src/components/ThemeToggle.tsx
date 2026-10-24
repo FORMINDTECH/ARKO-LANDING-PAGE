@@ -29,7 +29,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={theme === "dark" ? "Ativar modo claro" : "Ativar modo escuro"}
-      className="btn-secondary flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
+      className="btn-secondary flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full"
     >
       {theme === "dark" ? (
         <Sun className="h-4 w-4" strokeWidth={2.25} />

@@ -160,7 +160,8 @@ summary::-webkit-details-marker {
 }
 
 .flip-trigger:hover .flip-inner,
-.flip-trigger:focus-within .flip-inner {
+.flip-trigger:focus-within .flip-inner,
+.flip-trigger.is-flipped .flip-inner {
   transform: rotateY(180deg);
 }
 

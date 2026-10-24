@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { ClipboardList, Ruler, Send, Users } from "lucide-react";
+import { ChevronLeft, ChevronRight, ClipboardList, Ruler, Send, Users } from "lucide-react";
 import Container from "./Container";
 import Reveal from "./Reveal";
 import PanelCarousel from "./PanelCarousel";
+import SlideSwap from "./SlideSwap";
 
 const STEPS = [
   {
@@ -35,6 +36,12 @@ const STEPS = [
 
 export default function WebSystemSection() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
+
+  const goTo = (i: number, dir: number) => {
+    setDirection(dir);
+    setActiveIndex(i);
+  };
 
   return (
     <section id="painel" className="flex min-h-screen items-center bg-bg py-16 sm:py-20">
@@ -51,8 +58,69 @@ export default function WebSystemSection() {
           </p>
         </Reveal>
 
+        <div className="mt-8 lg:hidden">
+          <Reveal
+            direction="right"
+            className="rounded-[24px] bg-surface-2 p-4"
+          >
+            <PanelCarousel index={activeIndex} onChange={setActiveIndex} />
+          </Reveal>
+
+          <div className="mt-4 flex items-center justify-center gap-3">
+            <button
+              type="button"
+              aria-label="Passo anterior"
+              onClick={() =>
+                goTo((activeIndex - 1 + STEPS.length) % STEPS.length, -1)
+              }
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-surface text-ink-muted transition-colors hover:text-ink"
+            >
+              <ChevronLeft className="h-5 w-5" strokeWidth={2.25} />
+            </button>
+
+            <SlideSwap
+              itemKey={activeIndex}
+              direction={direction}
+              className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-accent bg-accent-panel px-4 py-3 text-sm font-semibold text-white"
+            >
+              {(() => {
+                const ActiveIcon = STEPS[activeIndex].icon;
+                return <ActiveIcon className="h-4 w-4 shrink-0" strokeWidth={2} />;
+              })()}
+              <span className="text-center">{STEPS[activeIndex].title}</span>
+            </SlideSwap>
+
+            <button
+              type="button"
+              aria-label="Próximo passo"
+              onClick={() => goTo((activeIndex + 1) % STEPS.length, 1)}
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-surface text-ink-muted transition-colors hover:text-ink"
+            >
+              <ChevronRight className="h-5 w-5" strokeWidth={2.25} />
+            </button>
+          </div>
+
+          <div className="mt-3 flex items-center justify-center gap-1.5">
+            {STEPS.map((step, i) => (
+              <button
+                key={step.title}
+                type="button"
+                aria-label={step.title}
+                onClick={() => goTo(i, i > activeIndex ? 1 : -1)}
+                className={`h-1.5 rounded-full transition-all ${
+                  i === activeIndex ? "w-6 bg-accent" : "w-1.5 bg-line"
+                }`}
+              />
+            ))}
+          </div>
+
+          <p className="mt-3 text-center text-sm leading-relaxed text-ink-muted">
+            {STEPS[activeIndex].description}
+          </p>
+        </div>
+
         <div
-          className="mt-8 grid items-start gap-6 lg:grid-cols-2"
+          className="mt-8 hidden items-start gap-6 lg:grid lg:grid-cols-2"
           style={{ contain: "content" }}
         >
           <Reveal
@@ -69,6 +137,7 @@ export default function WebSystemSection() {
                   aria-expanded={isActive}
                   onMouseEnter={() => setActiveIndex(i)}
                   onFocus={() => setActiveIndex(i)}
+                  onClick={() => setActiveIndex(i)}
                   className="relative cursor-pointer overflow-hidden rounded-2xl bg-surface p-5 pl-7 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   style={{ contain: "content" }}
                 >

@@ -43,6 +43,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="pt-BR"
       className={`${archivo.variable} ${barlow.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-bg text-ink">
         <Script id="theme-init" strategy="beforeInteractive">
