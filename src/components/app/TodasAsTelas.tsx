@@ -11,7 +11,7 @@ import { TELAS_APP, type TelaApp } from "../devices/telas";
  * A tela de calendário ficou de fora: o cartão "Desafios em grupo" vazio transborda no app
  * (altura fixa em ARKO-MOBILE/src/components/GruposDesafioCarousel.tsx). Volta quando corrigir.
  */
-const ORDEM: TelaApp[] = ["inicio", "treinos", "carga", "alimentacao", "musculos", "feed"];
+const ORDEM: TelaApp[] = ["inicio", "treinos", "treinoLista", "carga", "alimentacao", "musculos", "feed"];
 
 function Faixa({ copia = false }: { copia?: boolean }) {
   return (

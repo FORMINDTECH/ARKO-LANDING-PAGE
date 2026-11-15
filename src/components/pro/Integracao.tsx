@@ -20,7 +20,7 @@ export default function Integracao() {
       <Container>
         <Titulo
           centro
-          rotulo="04 · Integrado ao app"
+          rotulo="04 · Integrado ao app do aluno"
           titulo="Você no computador. O aluno no celular. A mesma conversa."
         />
 
@@ -30,7 +30,7 @@ export default function Integracao() {
           </Reveal>
           <Drift y={-50} className="absolute bottom-[-8%] right-0 w-[26%] max-w-[270px]">
             <Reveal delay={200} direction="right">
-              <Phone tela="treinos" sizes="(min-width: 1024px) 270px, 26vw" brilho />
+              <Phone tela="treinoLista" brilho />
             </Reveal>
           </Drift>
         </div>

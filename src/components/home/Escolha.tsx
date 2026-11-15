@@ -20,8 +20,8 @@ const PORTAS = [
     texto: "Uma forma mais simples de organizar treinos, alimentação e evolução num só lugar.",
     cta: "Conhecer o app",
     visual: "app" as const,
-    // cresce para a direita (em direção ao cartão do lado)
-    origem: "lg:origin-left",
+    // no hover, desliza em direção ao cartão do lado
+    sentido: 1,
   },
   {
     href: ROTAS.profissionais,
@@ -30,7 +30,7 @@ const PORTAS = [
     texto: "Organize seus alunos, monte os planos de cada um e acompanhe a evolução numa plataforma integrada.",
     cta: "Conhecer o painel",
     visual: "painel" as const,
-    origem: "lg:origin-right",
+    sentido: -1,
   },
 ];
 
@@ -42,12 +42,13 @@ export default function Escolha() {
         <div id="escolha" data-centralizar="">
           <Titulo centro className="lg:max-w-4xl" rotulo="Sua experiência" titulo="Como você quer usar o ARKO?" />
 
-          <div className="mt-10 grid gap-4 lg:grid-cols-2 lg:gap-5">
+          <div className="portas mt-10 grid gap-4 lg:grid-cols-2 lg:gap-5">
             {PORTAS.map((p, i) => (
-              <Reveal key={p.href} delay={i * 120} direction="scale" className="relative h-full has-[a:hover]:z-10 has-[a:focus-visible]:z-10">
+              <Reveal key={p.href} delay={i * 120} direction="scale" className="relative h-full">
                 <Link
                   href={p.href}
-                  className={`group relative flex h-full flex-col overflow-hidden rounded-[28px] border-2 border-line/0 bg-surface-2 p-7 shadow-none transition-[transform,border-color,box-shadow] duration-[900ms] ease-[cubic-bezier(0.25,0.8,0.25,1)] hover:scale-[1.03] hover:border-accent/60 hover:shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)] focus-visible:scale-[1.03] focus-visible:border-accent focus-visible:outline-none sm:p-9 ${p.origem}`}
+                  className="porta group relative flex h-full flex-col overflow-hidden rounded-[28px] border-2 border-transparent bg-surface-2 p-7 focus-visible:outline-none sm:p-9"
+                    style={{ "--sentido": p.sentido } as React.CSSProperties}
                 >
                   {/* luz que acende no hover */}
                   <div

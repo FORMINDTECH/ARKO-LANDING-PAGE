@@ -3,11 +3,13 @@ import Tela from "./Tela";
 import { TELAS_APP, type TelaApp } from "./telas";
 
 /** Barra de status padrão de celular: horário, ilha, sinal, Wi‑Fi e bateria. */
-function BarraStatus() {
+function BarraStatus({ clara = false }: { clara?: boolean }) {
   return (
     <div
       aria-hidden
-      className="relative flex h-[12.5cqw] items-center justify-between bg-app px-[7.5cqw] pt-[1.2cqw] text-[var(--color-app-ink)]"
+      className={`relative flex h-[12.5cqw] items-center justify-between px-[7.5cqw] pt-[1.2cqw] ${
+        clara ? "bg-white text-[#0f172a]" : "bg-app text-[var(--color-app-ink)]"
+      }`}
     >
       <span className="w-[20cqw] text-[3.9cqw] font-semibold leading-none tracking-tight tabular-nums">9:41</span>
       <span className="absolute left-1/2 top-[2.6cqw] h-[7.2cqw] w-[26cqw] -translate-x-1/2 rounded-full bg-black" />
@@ -62,7 +64,7 @@ function Moldura({
         <span aria-hidden className="absolute -left-[0.8cqw] top-[31%] h-[11%] w-[0.8cqw] rounded-l-sm bg-[#2a2a2e]" />
         <span aria-hidden className="absolute -right-[0.8cqw] top-[27%] h-[15%] w-[0.8cqw] rounded-r-sm bg-[#2a2a2e]" />
         <div className="relative overflow-hidden rounded-[12.5cqw] bg-app">
-          <BarraStatus />
+          <BarraStatus clara={"barra" in t && t.barra === "clara"} />
           <div className="relative aspect-[1170/2532] w-full">
             <Tela base={t.base} alt={t.alt} fill eager={eager} className="object-cover object-top" />
           </div>

@@ -7,6 +7,8 @@
 export const TELAS_APP = {
   inicio: { base: "/screens/app/inicio", rotulo: "Início", alt: "Tela inicial do app ARKO com a sequência de dias treinados e as metas do dia" },
   treinos: { base: "/screens/app/treinos", rotulo: "Treinos", alt: "Lista de treinos no app ARKO" },
+  // treino em andamento, no modo lista (duas séries do primeiro exercício já feitas)
+  treinoLista: { base: "/screens/app/treino-lista", rotulo: "Treino em andamento", alt: "Treino em andamento no app ARKO: cronômetro, botão de pausar e o supino reto com duas séries concluídas" },
   alimentacao: { base: "/screens/app/alimentacao", rotulo: "Alimentação", alt: "Resumo de calorias e refeições do dia no app ARKO" },
   carga: { base: "/screens/app/carga", rotulo: "Progressão de carga", alt: "Gráfico de progressão de carga do agachamento livre no app ARKO" },
   musculos: { base: "/screens/app/musculos", rotulo: "Frequência", alt: "Treinos concluídos por dia e mapa dos grupos musculares no app ARKO" },
