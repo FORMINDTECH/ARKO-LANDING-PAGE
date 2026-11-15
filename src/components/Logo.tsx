@@ -1,23 +1,26 @@
 import Image from "next/image";
 
-export default function Logo({ className = "" }: { className?: string }) {
+/** Logotipo positivo (escuro) no tema claro e negativo (claro) no escuro. */
+export default function Logo({ className = "", priority = false }: { className?: string; priority?: boolean }) {
   return (
     <>
       <Image
-        src="/brand/arko-logo.png"
-        alt="ARKO"
-        width={2400}
-        height={676}
-        priority
-        className={`logo-dark ${className}`}
+        src="/brand/arko-logo-light.svg"
+        alt="Arko"
+        width={362}
+        height={102}
+        priority={priority}
+        unoptimized
+        className={`only-light ${className}`}
       />
       <Image
-        src="/brand/arko-logo-light.png"
-        alt="ARKO"
-        width={2400}
-        height={676}
-        priority
-        className={`logo-light ${className}`}
+        src="/brand/arko-logo.svg"
+        alt="Arko"
+        width={362}
+        height={102}
+        priority={priority}
+        unoptimized
+        className={`only-dark ${className}`}
       />
     </>
   );

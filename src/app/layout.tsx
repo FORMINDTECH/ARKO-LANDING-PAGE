@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Archivo, Barlow, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import { SITE_URL } from "@/lib/links";
 
+// O claro é o padrão. Só aplica o escuro se o visitante já tiver escolhido.
 const THEME_INIT_SCRIPT = `
   try {
-    var saved = localStorage.getItem("arko-theme");
-    if (saved === "light" || saved === "dark") {
-      document.documentElement.setAttribute("data-theme", saved);
+    if (localStorage.getItem("arko-theme") === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
     }
   } catch (e) {}
 `;
@@ -33,9 +34,26 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ARKO: Leve tecnologia de ponta para seus alunos",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Arko · Treino, dieta e evolução num só lugar",
+    template: "%s · Arko",
+  },
   description:
-    "ARKO é o app de treino e nutrição com relatórios de IA para personal trainers, nutricionistas e consultorias gerenciarem alunos, treinos e evolução em um só lugar.",
+    "O Arko organiza treino, alimentação e evolução física. Um painel para nutricionistas, personal trainers e consultorias, e um app para quem treina por conta própria.",
+  applicationName: "Arko",
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: "Arko",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f5f4f1" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b0b0c" },
+  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -45,7 +63,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${archivo.variable} ${barlow.variable} ${jetbrainsMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-bg text-ink">
+      <body className="min-h-full flex flex-col overflow-x-clip bg-bg text-ink">
         <Script id="theme-init" strategy="beforeInteractive">
           {THEME_INIT_SCRIPT}
         </Script>
