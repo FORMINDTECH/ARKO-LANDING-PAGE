@@ -3,6 +3,9 @@ import Script from "next/script";
 import { Archivo, Barlow, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import Header from "@/components/site/Header";
+import Footer from "@/components/site/Footer";
+import { SITE_URL } from "@/lib/links";
 
 const THEME_INIT_SCRIPT = `
   try {
@@ -33,9 +36,13 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ARKO: Leve tecnologia de ponta para seus alunos",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "ARKO: treino, alimentação e evolução num app só",
+    template: "%s · ARKO",
+  },
   description:
-    "ARKO é o app de treino e nutrição com relatórios de IA para personal trainers, nutricionistas e consultorias gerenciarem alunos, treinos e evolução em um só lugar.",
+    "ARKO junta treino, alimentação e evolução num app. Use por conta própria ou com o seu personal ou nutricionista, que acompanha tudo por um painel web.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -45,11 +52,23 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${archivo.variable} ${barlow.variable} ${jetbrainsMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-bg text-ink">
+      <body className="flex min-h-full flex-col bg-bg text-ink">
         <Script id="theme-init" strategy="beforeInteractive">
           {THEME_INIT_SCRIPT}
         </Script>
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          <a
+            href="#conteudo"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-surface focus:px-4 focus:py-2 focus:text-sm"
+          >
+            Pular para o conteúdo
+          </a>
+          <Header />
+          <main id="conteudo" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );

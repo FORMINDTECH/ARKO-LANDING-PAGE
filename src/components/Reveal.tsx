@@ -6,8 +6,13 @@ const HIDDEN_CLASS = {
   up: "opacity-0 translate-y-8",
   left: "opacity-0 -translate-x-12",
   right: "opacity-0 translate-x-12",
+  scale: "opacity-0 translate-y-6 scale-[0.97]",
 } as const;
 
+/**
+ * Entrada suave quando o bloco aparece na tela (o movimento da landing original).
+ * Expõe `data-visivel` para filhos que animam junto (ex.: .linha-desenha).
+ */
 export default function Reveal({
   children,
   className = "",
@@ -15,15 +20,17 @@ export default function Reveal({
   direction = "up",
   id,
   style,
+  as: Tag = "div",
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
-  direction?: "up" | "left" | "right";
+  direction?: keyof typeof HIDDEN_CLASS;
   id?: string;
   style?: CSSProperties;
+  as?: "div" | "li" | "figure" | "section";
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -45,17 +52,16 @@ export default function Reveal({
   }, []);
 
   return (
-    <div
-      ref={ref}
+    <Tag
+      ref={ref as never}
       id={id}
+      data-visivel={visible}
       className={`transition-all duration-700 ease-out ${
-        visible
-          ? "opacity-100 translate-x-0 translate-y-0"
-          : HIDDEN_CLASS[direction]
+        visible ? "translate-x-0 translate-y-0 scale-100 opacity-100" : HIDDEN_CLASS[direction]
       } ${className}`}
       style={{ transitionDelay: `${delay}ms`, ...style }}
     >
       {children}
-    </div>
+    </Tag>
   );
 }

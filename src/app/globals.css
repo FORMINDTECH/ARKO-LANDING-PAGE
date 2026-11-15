@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/*
+ * Tokens da marca ARKO (Kit de Marca: Carbono, Grafite, Âmbar, Giz, Aço e Laranja).
+ * Escuro é o padrão. O claro entra pelo botão de tema ou pela preferência do sistema.
+ */
 :root {
   --color-bg: #0b0b0c;
   --color-surface: #1a1a1c;
@@ -13,6 +17,11 @@
   --color-info: #4895ef;
   --color-success: #12a572;
   --color-danger: #e63946;
+  --shadow-device: 0 40px 80px -30px rgba(0, 0, 0, 0.75), 0 18px 40px -20px rgba(0, 0, 0, 0.6);
+  --shadow-float: 0 24px 48px -20px rgba(0, 0, 0, 0.7), 0 8px 18px -10px rgba(0, 0, 0, 0.5);
+  /* fundo das telas do produto (barra de status do celular, molduras) */
+  --color-app: #000000;
+  --color-app-ink: #ffffff;
 }
 
 :root[data-theme="light"] {
@@ -22,9 +31,10 @@
   --color-line: #ddd9d3;
   --color-ink: #0b0b0c;
   --color-ink-muted: #5b5a5d;
-  --color-accent: #fd820f;
-  --color-accent-2: #944e0d;
-  --color-accent-3: #2b1a0b;
+  --shadow-device: 0 40px 80px -36px rgba(40, 30, 20, 0.35), 0 18px 40px -24px rgba(40, 30, 20, 0.25);
+  --shadow-float: 0 24px 48px -24px rgba(40, 30, 20, 0.35), 0 8px 18px -12px rgba(40, 30, 20, 0.2);
+  --color-app: #f4f6fa;
+  --color-app-ink: #0f172a;
 }
 
 @media (prefers-color-scheme: light) {
@@ -35,6 +45,10 @@
     --color-line: #ddd9d3;
     --color-ink: #0b0b0c;
     --color-ink-muted: #5b5a5d;
+    --shadow-device: 0 40px 80px -36px rgba(40, 30, 20, 0.35), 0 18px 40px -24px rgba(40, 30, 20, 0.25);
+    --shadow-float: 0 24px 48px -24px rgba(40, 30, 20, 0.35), 0 8px 18px -12px rgba(40, 30, 20, 0.2);
+    --color-app: #f4f6fa;
+    --color-app-ink: #0f172a;
   }
 }
 
@@ -51,13 +65,15 @@
   --color-info: var(--color-info);
   --color-success: var(--color-success);
   --color-danger: var(--color-danger);
+  --color-app: var(--color-app);
   --font-sans: var(--font-barlow);
   --font-display: var(--font-archivo);
   --font-mono: var(--font-jetbrains-mono);
 }
 
 html {
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 6rem;
+  overflow-x: clip;
 }
 
 html.lenis,
@@ -69,6 +85,7 @@ body {
   background: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow-x: clip;
 }
 
 h1,
@@ -82,30 +99,55 @@ h3 {
   font-family: var(--font-mono), ui-monospace, monospace;
 }
 
-.logo-light {
+/* Rótulo em mono, caixa alta (escala "Rótulo" do dossiê de marca) */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-accent);
+}
+
+/*
+ * Imagens por tema (logo e screenshots). Cada tela existe em versão clara e escura reais.
+ * A do tema oculto fica com display:none e, por ser lazy, não é baixada.
+ */
+.tema-claro {
   display: none;
 }
 
-:root[data-theme="light"] .logo-dark {
+:root[data-theme="light"] .tema-escuro {
   display: none;
 }
 
-:root[data-theme="light"] .logo-light {
+:root[data-theme="light"] .tema-claro {
   display: block;
 }
 
 @media (prefers-color-scheme: light) {
-  :root:not([data-theme]) .logo-dark {
+  :root:not([data-theme]) .tema-escuro {
     display: none;
   }
-  :root:not([data-theme]) .logo-light {
+  :root:not([data-theme]) .tema-claro {
     display: block;
   }
 }
 
 ::selection {
   background: var(--color-accent);
-  color: var(--color-ink);
+  color: #0b0b0c;
 }
 
 .bg-accent-panel {
@@ -126,67 +168,7 @@ summary::-webkit-details-marker {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-marquee {
-  animation: marquee 60s linear infinite;
-}
-
-.flip-perspective {
-  perspective: 1400px;
-}
-
-.flip-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.flip-face {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.flip-face-back {
-  transform: rotateY(180deg);
-}
-
-.flip-trigger:hover .flip-inner,
-.flip-trigger:focus-within .flip-inner,
-.flip-trigger.is-flipped .flip-inner {
-  transform: rotateY(180deg);
-}
-
-.hazard-stripe {
-  background-image: linear-gradient(
-    135deg,
-    var(--color-accent) 25%,
-    #0a0a0a 25%,
-    #0a0a0a 50%,
-    var(--color-accent) 50%,
-    var(--color-accent) 75%,
-    #0a0a0a 75%,
-    #0a0a0a 100%
-  );
-  background-size: 24px 24px;
-  animation: hazard-march 1s linear infinite;
-}
-
-@keyframes hazard-march {
-  to {
-    background-position: 24px 0;
-  }
-}
-
-
+/* Botões (mesmo desenho da landing original) */
 .btn-primary {
   background: var(--color-surface);
   border: 2px solid var(--color-line);
@@ -212,14 +194,129 @@ summary::-webkit-details-marker {
   border-color: var(--color-accent);
 }
 
-.btn-light {
-  background-color: #ffffff;
-  color: #0a0a0a;
-  border: 2px solid transparent;
-  transition: border-color 0.2s ease;
+/* Botão de destaque: Carbono sobre Laranja (dossiê de marca, 7,8:1) */
+.btn-accent {
+  background: var(--color-accent);
+  border: 2px solid var(--color-accent);
+  color: #0b0b0c;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.btn-light:hover,
-.btn-light:focus-visible {
-  border-color: rgba(11, 11, 12, 0.35);
+.btn-accent:hover,
+.btn-accent:focus-visible {
+  background: #ff9431;
+  border-color: #ff9431;
+}
+
+/* Seta que anda um pouco no hover do link/botão pai */
+.seta {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .seta,
+.group:focus-visible .seta,
+a:hover > .seta,
+a:focus-visible > .seta {
+  transform: translateX(4px);
+}
+
+/* Sublinhado laranja sob uma palavra do título: fica abaixo das letras, sem passar por trás delas */
+.grifo {
+  white-space: nowrap;
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 0.09em;
+  text-underline-offset: 0.2em;
+  text-decoration-skip-ink: auto;
+}
+
+/* Flutuação bem lenta para recortes soltos (sem quique) */
+@keyframes flutuar {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+.flutuar {
+  animation: flutuar 7s ease-in-out infinite;
+}
+
+.flutuar-lento {
+  animation: flutuar 9s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+/* Linha que se desenha quando o bloco entra na tela (usa o estado do Reveal) */
+.linha-desenha {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-visivel="true"] .linha-desenha {
+  transform: scaleX(1);
+}
+
+/* Faixa de telas: some nas bordas */
+.mascara-lados {
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.sem-barra {
+  scrollbar-width: none;
+}
+
+.sem-barra::-webkit-scrollbar {
+  display: none;
+}
+
+/* Carrossel contínuo (faixa duplicada; anda metade da largura e recomeça sem salto) */
+@keyframes esteira {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.esteira {
+  animation: esteira 60s linear infinite;
+}
+
+.esteira:hover {
+  animation-play-state: paused;
+}
+
+/* Celular flutuando, devagar, com um leve balanço */
+@keyframes boiar {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-1deg);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0) rotate(1deg);
+  }
+}
+
+.boiar {
+  animation: boiar 8s ease-in-out infinite;
+}
+
+/* Sombra no chão que encolhe quando o celular sobe */
+@keyframes sombra-boiar {
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scaleX(0.82);
+    opacity: 0.3;
+  }
+}
+
+.sombra-boiar {
+  animation: sombra-boiar 8s ease-in-out infinite;
 }
