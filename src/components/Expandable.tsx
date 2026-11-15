@@ -14,9 +14,6 @@ export default function Expandable({
   triggerClassName?: string;
 }) {
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (!open) return;
@@ -50,7 +47,7 @@ export default function Expandable({
         {children(false)}
       </div>
 
-      {open && mounted
+      {open
         ? createPortal(
             <div
               className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-6 backdrop-blur-sm"
