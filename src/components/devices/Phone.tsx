@@ -1,3 +1,4 @@
+import Ampliavel from "../Ampliavel";
 import Tela from "./Tela";
 import { TELAS_APP, type TelaApp } from "./telas";
 
@@ -35,24 +36,17 @@ function BarraStatus() {
   );
 }
 
-/**
- * Celular com tela real do app. A largura vem do `className` (ex.: w-[280px]);
- * moldura, cantos, ilha e barra de status escalam juntos (container query units).
- * As imagens são pedidas em resolução alta para o texto pequeno do app ficar nítido.
- */
-export default function Phone({
+/** O aparelho em si (moldura + barra de status + captura). A largura vem do `className`. */
+function Moldura({
   tela,
   className = "",
   eager = false,
-  brilho = false,
+  brilho = true,
 }: {
   tela: TelaApp;
   className?: string;
   eager?: boolean;
-  /** Brilho laranja atrás do aparelho no hover (mesmo efeito da landing original). */
   brilho?: boolean;
-  /** Mantido por compatibilidade; o tamanho pedido é sempre alto. */
-  sizes?: string;
 }) {
   const t = TELAS_APP[tela];
   return (
@@ -70,14 +64,7 @@ export default function Phone({
         <div className="relative overflow-hidden rounded-[12.5cqw] bg-app">
           <BarraStatus />
           <div className="relative aspect-[1170/2532] w-full">
-            <Tela
-              base={t.base}
-              alt={t.alt}
-              fill
-              sizes="(min-width: 1024px) 600px, 100vw"
-              eager={eager}
-              className="object-cover object-top"
-            />
+            <Tela base={t.base} alt={t.alt} fill eager={eager} className="object-cover object-top" />
           </div>
         </div>
         <div
@@ -86,5 +73,40 @@ export default function Phone({
         />
       </div>
     </div>
+  );
+}
+
+/**
+ * Celular com tela real do app. A largura vem do `className` (ex.: w-[280px]);
+ * moldura, cantos, ilha e barra de status escalam juntos (container query units).
+ * Todo celular acende no hover e abre ampliado ao clicar (a não ser dentro de um link).
+ */
+export default function Phone({
+  tela,
+  className = "",
+  eager = false,
+  brilho = true,
+  ampliar = true,
+}: {
+  tela: TelaApp;
+  className?: string;
+  eager?: boolean;
+  /** Brilho laranja atrás do aparelho no hover (mesmo efeito da landing original). */
+  brilho?: boolean;
+  /** Clique abre o celular em tamanho grande. Desligue quando o celular estiver dentro de um link. */
+  ampliar?: boolean;
+  /** Mantido por compatibilidade; as capturas são servidas no arquivo original. */
+  sizes?: string;
+}) {
+  if (!ampliar) return <Moldura tela={tela} eager={eager} brilho={brilho} className={className} />;
+  return (
+    <Ampliavel
+      className={className}
+      label={`Ampliar tela: ${TELAS_APP[tela].rotulo}`}
+      // ampliado: altura da tela (o aparelho tem ~2,35 vezes a largura)
+      ampliado={<Moldura tela={tela} brilho={false} className="w-[min(86vw,calc(88vh/2.4))]" />}
+    >
+      <Moldura tela={tela} eager={eager} brilho={brilho} className="w-full" />
+    </Ampliavel>
   );
 }

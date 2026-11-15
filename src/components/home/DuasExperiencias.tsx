@@ -34,22 +34,23 @@ function Lista({ itens }: { itens: string[] }) {
   );
 }
 
-function Fluxo({ sentido, texto }: { sentido: "direita" | "esquerda"; texto: string }) {
+function Fluxo({ sentido, rotulo, texto }: { sentido: "direita" | "esquerda"; rotulo: string; texto: string }) {
   return (
-    <div className="flex flex-col items-center gap-2 text-center">
-      <div className="relative flex w-full items-center">
-        <span className="h-px flex-1 bg-gradient-to-r from-transparent via-accent/70 to-transparent" />
+    <div className="flex w-full max-w-[220px] flex-col items-center gap-3 text-center">
+      <div className="relative flex h-11 w-full items-center">
+        <span className="h-0.5 flex-1 rounded-full bg-gradient-to-r from-accent/10 via-accent to-accent/10" />
         <span className="absolute inset-0 flex items-center justify-center">
-          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-accent/50 bg-bg text-accent">
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-accent text-[#0b0b0c] shadow-[0_0_0_6px_rgba(253,130,15,0.15)]">
             {sentido === "esquerda" ? (
-              <ArrowLeft className="h-4 w-4" strokeWidth={2.25} />
+              <ArrowLeft className="h-5 w-5" strokeWidth={2.5} />
             ) : (
-              <ArrowRight className="h-4 w-4" strokeWidth={2.25} />
+              <ArrowRight className="h-5 w-5" strokeWidth={2.5} />
             )}
           </span>
         </span>
       </div>
-      <p className="max-w-[18ch] text-xs leading-snug text-ink-muted">{texto}</p>
+      <p className="font-data text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">{rotulo}</p>
+      <p className="text-sm font-medium leading-snug text-ink sm:text-[15px]">{texto}</p>
     </div>
   );
 }
@@ -64,29 +65,43 @@ export default function DuasExperiencias() {
           apoio="As duas pontas leem e escrevem no mesmo lugar. Por isso nada se perde no meio do caminho."
         />
 
-        <div className="mt-16 grid items-end gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,1.4fr)_minmax(0,6.6fr)] lg:gap-6">
-          {/* Quem treina */}
-          <Reveal direction="left" className="flex flex-col">
+        {/*
+          Desktop: duas linhas alinhadas. Em cima, os textos dos dois lados (mesmo topo);
+          embaixo, celular, setas e painel centralizados na mesma altura.
+          Celular: cada lado empilhado (texto e aparelho), com as setas entre eles.
+        */}
+        <div className="mt-16 grid gap-x-6 gap-y-10 lg:grid-cols-[minmax(0,3.6fr)_minmax(0,2fr)_minmax(0,6.4fr)] lg:gap-y-12">
+          {/* Quem treina: texto */}
+          <Reveal direction="left" className="lg:col-start-1 lg:row-start-1">
             <p className="eyebrow">No celular</p>
             <h3 className="mt-3 text-2xl font-extrabold tracking-tight text-ink">Quem treina</h3>
             <Lista itens={QUEM_TREINA} />
-            <div className="mt-10 flex justify-center lg:justify-start">
-              <Phone tela="treinos" className="w-[62%] max-w-[260px] lg:w-[80%]" sizes="(min-width: 1024px) 260px, 60vw" brilho />
-            </div>
           </Reveal>
 
-          {/* O que circula */}
-          <Reveal delay={200} className="flex flex-row items-center justify-center gap-6 lg:mb-[18%] lg:flex-col lg:gap-14">
-            <Fluxo sentido="esquerda" texto="Treino e dieta publicados chegam no app" />
-            <Fluxo sentido="direita" texto="Treino concluído aparece para o profissional" />
+          {/* Quem treina: celular */}
+          <Reveal direction="left" delay={80} className="flex justify-center lg:col-start-1 lg:row-start-2 lg:items-center">
+            <Phone tela="treinos" className="w-[56%] max-w-[210px]" brilho />
           </Reveal>
 
-          {/* Quem acompanha */}
-          <Reveal direction="right" delay={100} className="flex flex-col">
+          {/* O que circula entre os dois, no meio da linha dos aparelhos */}
+          <Reveal
+            delay={200}
+            className="flex flex-row items-center justify-center gap-6 lg:col-start-2 lg:row-start-2 lg:flex-col lg:gap-14"
+          >
+            <Fluxo sentido="esquerda" rotulo="Painel → App" texto="Treino e dieta publicados chegam no app" />
+            <Fluxo sentido="direita" rotulo="App → Painel" texto="Treino concluído aparece para o profissional" />
+          </Reveal>
+
+          {/* Quem acompanha: texto */}
+          <Reveal direction="right" delay={100} className="lg:col-start-3 lg:row-start-1">
             <p className="eyebrow">No computador</p>
             <h3 className="mt-3 text-2xl font-extrabold tracking-tight text-ink">Quem acompanha</h3>
             <Lista itens={QUEM_ACOMPANHA} />
-            <Browser tela="alunos" className="mt-10" sizes="(min-width: 1024px) 680px, 92vw" />
+          </Reveal>
+
+          {/* Quem acompanha: painel */}
+          <Reveal direction="right" delay={180} className="flex items-center lg:col-start-3 lg:row-start-2">
+            <Browser tela="alunos" className="w-full" sizes="(min-width: 1024px) 680px, 92vw" />
           </Reveal>
         </div>
       </Container>

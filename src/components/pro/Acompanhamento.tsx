@@ -1,7 +1,6 @@
 import Container from "../Container";
 import Reveal from "../Reveal";
 import Drift from "../Drift";
-import Ampliavel from "../Ampliavel";
 import Browser from "../devices/Browser";
 import Phone from "../devices/Phone";
 import Tela from "../devices/Tela";
@@ -68,9 +67,7 @@ export default function Acompanhamento() {
 
         <div className="relative mt-14 lg:pb-28">
           <Reveal direction="scale" className="lg:w-[74%]">
-            <Ampliavel>
-              <Browser tela="medidas" sizes="(min-width: 1280px) 1000px, 96vw" />
-            </Ampliavel>
+            <Browser tela="medidas" />
           </Reveal>
 
           {/* a lupa sobre a tela */}

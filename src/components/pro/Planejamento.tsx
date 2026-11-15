@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Container from "../Container";
 import Reveal from "../Reveal";
-import Ampliavel from "../Ampliavel";
 import Browser, { PainelImagem } from "../devices/Browser";
 import Titulo from "../ui/Titulo";
 import type { TelaPainel } from "../devices/telas";
@@ -103,7 +102,6 @@ export default function Planejamento() {
 
           {/* tela: as quatro empilhadas, só a ativa aparece */}
           <Reveal delay={100} direction="right" className="min-w-0">
-            <Ampliavel>
             <Browser tela={ETAPAS[ativa].tela}>
               <div id="planejamento-tela" role="tabpanel" className="grid">
                 {ETAPAS.map((e, i) => (
@@ -119,7 +117,6 @@ export default function Planejamento() {
                 ))}
               </div>
             </Browser>
-            </Ampliavel>
           </Reveal>
         </div>
       </Container>

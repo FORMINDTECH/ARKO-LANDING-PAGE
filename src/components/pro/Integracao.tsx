@@ -1,7 +1,6 @@
 import Container from "../Container";
 import Reveal from "../Reveal";
 import Drift from "../Drift";
-import Ampliavel from "../Ampliavel";
 import Browser from "../devices/Browser";
 import Phone from "../devices/Phone";
 import Titulo from "../ui/Titulo";
@@ -27,9 +26,7 @@ export default function Integracao() {
 
         <div className="relative mx-auto mt-16 max-w-6xl">
           <Reveal direction="scale" className="pr-[18%] sm:pr-[22%]">
-            <Ampliavel>
-              <Browser tela="chat" sizes="(min-width: 1280px) 900px, 80vw" />
-            </Ampliavel>
+            <Browser tela="chat" />
           </Reveal>
           <Drift y={-50} className="absolute bottom-[-8%] right-0 w-[26%] max-w-[270px]">
             <Reveal delay={200} direction="right">

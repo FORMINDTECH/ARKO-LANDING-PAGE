@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, Menu, X } from "lucide-react";
+import { useLenis } from "lenis/react";
 import Container from "../Container";
 import Logo from "../Logo";
 import ThemeToggle from "../ThemeToggle";
@@ -30,6 +31,17 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [rolou, setRolou] = useState(false);
   const cta = ctaDaPagina(pathname);
+  const lenis = useLenis();
+
+  // O logo sempre leva ao topo da página inicial. Já estando nela, só rola até o topo (suave).
+  const irParaInicio = (e: React.MouseEvent) => {
+    setOpen(false);
+    if (pathname !== ROTAS.inicio) return;
+    e.preventDefault();
+    if (lenis) lenis.scrollTo(0);
+    else window.scrollTo({ top: 0, behavior: "smooth" });
+    history.replaceState(null, "", ROTAS.inicio);
+  };
 
   useEffect(() => {
     const onScroll = () => setRolou(window.scrollY > 24);
@@ -52,7 +64,7 @@ export default function Header() {
           }`}
         >
           <div className="flex h-16 items-center justify-between gap-4 px-4 sm:px-6">
-            <Link href={ROTAS.inicio} className="flex shrink-0 items-center" aria-label="ARKO, página inicial">
+            <Link href={ROTAS.inicio} onClick={irParaInicio} className="flex shrink-0 items-center" aria-label="ARKO, página inicial">
               <Logo className="h-6 w-auto sm:h-7" eager />
             </Link>
 
@@ -123,7 +135,7 @@ export default function Header() {
               <nav aria-label="Menu" className="flex flex-col gap-1 border-t border-line/60 px-4 py-4">
                 <Link
                   href={ROTAS.inicio}
-                  onClick={() => setOpen(false)}
+                  onClick={irParaInicio}
                   className="rounded-lg px-3 py-2.5 text-sm font-medium text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink"
                 >
                   Início
