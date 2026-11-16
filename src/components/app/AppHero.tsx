@@ -14,7 +14,7 @@ import { DIAS_TESTE_GRATIS } from "@/lib/precos";
  */
 export default function AppHero() {
   return (
-    <section className="relative overflow-hidden pb-16 pt-32 sm:pt-40 lg:pb-24">
+    <section className="relative overflow-hidden pb-10 pt-28 sm:pb-16 sm:pt-40 lg:pb-24">
       <div
         aria-hidden
         className="pointer-events-none absolute left-1/2 top-[38%] h-[700px] w-[700px] -translate-x-[10%] rounded-full bg-accent/15 blur-[130px]"
@@ -39,24 +39,24 @@ export default function AppHero() {
           <Reveal delay={150} direction="scale" className="relative mx-auto w-full max-w-[560px]">
             <div className="relative mx-auto aspect-[1/1.1] w-full">
               {/* atrás, à esquerda */}
-              <Drift y={30} rotate={-1.5} className="absolute left-[2%] top-[12%] w-[38%]">
+              <Drift y={30} rotate={-1.5} className="absolute left-0 top-[12%] w-[36%] sm:left-[2%] sm:w-[38%]">
                 <Phone tela="treinos" className="w-full -rotate-[8deg] opacity-90" sizes="(min-width: 1024px) 210px, 36vw" />
               </Drift>
               {/* atrás, à direita */}
-              <Drift y={44} rotate={1.5} className="absolute right-[2%] top-[16%] w-[38%]">
+              <Drift y={44} rotate={1.5} className="absolute right-0 top-[16%] w-[36%] sm:right-[2%] sm:w-[38%]">
                 <Phone tela="alimentacao" className="w-full rotate-[8deg] opacity-90" sizes="(min-width: 1024px) 210px, 36vw" />
               </Drift>
               {/* principal */}
-              <Drift y={-20} className="absolute left-[26%] top-0 z-10 w-[48%]">
+              <Drift y={-20} className="absolute left-[23%] top-0 z-10 w-[54%] sm:left-[26%] sm:w-[48%]">
                 <Phone tela="inicio" eager className="w-full" sizes="(min-width: 1024px) 270px, 46vw" brilho />
               </Drift>
               {/* recortes na frente */}
-              <Drift y={-60} className="absolute -left-[4%] bottom-[6%] z-20 w-[50%] sm:-left-[10%]">
+              <Drift y={-60} className="absolute bottom-[2%] left-0 z-20 w-[58%] sm:-left-[10%] sm:bottom-[6%] sm:w-[50%]">
                 <div className="flutuar">
                   <Recorte nome="carga" sizes="(min-width: 1024px) 270px, 46vw" eager />
                 </div>
               </Drift>
-              <Drift y={-40} className="absolute -right-[4%] bottom-[34%] z-20 w-[46%] sm:-right-[10%]">
+              <Drift y={-40} className="absolute bottom-[34%] z-20 hidden w-[46%] sm:-right-[10%] sm:block">
                 <div className="flutuar-lento">
                   <Recorte nome="refeicao" sizes="(min-width: 1024px) 250px, 42vw" eager />
                 </div>

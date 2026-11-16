@@ -25,15 +25,18 @@ export const TELAS_APP = {
 
 export type TelaApp = keyof typeof TELAS_APP;
 
+// `mobile`: recorte da área útil mostrado em telas estreitas (frações da captura: x, y, largura, altura).
+// No celular, a tela inteira do painel (16:9, com menu lateral) fica ilegível; o recorte mostra só o
+// conteúdo que importa, maior. A partir de 640 px aparece a tela inteira.
 export const TELAS_PAINEL = {
-  dashboard: { rota: "dashboard", alt: "Dashboard do painel ARKO com total de alunos, alunos ativos, treinos na semana e vagas" },
-  alunos: { rota: "alunos", alt: "Lista de alunos com o código de convite no painel ARKO" },
-  treinos: { rota: "treinos", alt: "Gestão de treinos de uma aluna no painel ARKO" },
-  alimentacao: { rota: "alimentacao", alt: "Plano alimentar com calorias, macros, água e templates de dieta no painel ARKO" },
-  medidas: { rota: "medidas", alt: "Medidas corporais e detalhes da última avaliação no painel ARKO" },
-  chat: { rota: "chat", alt: "Chat do painel ARKO com um treino concluído enviado pela aluna" },
-  desafios: { rota: "desafios", alt: "Desafios em grupo criados pelo profissional no painel ARKO" },
-  modelos: { rota: "modelos", alt: "Modelos de treino reutilizáveis no painel ARKO" },
+  dashboard: { rota: "dashboard", mobile: { x: 0.18, y: 0.1, w: 0.42, h: 0.87 }, alt: "Dashboard do painel ARKO com total de alunos, alunos ativos, treinos na semana e vagas" },
+  alunos: { rota: "alunos", mobile: { x: 0.18, y: 0.06, w: 0.8, h: 0.87 }, alt: "Lista de alunos com o código de convite no painel ARKO" },
+  treinos: { rota: "treinos", mobile: { x: 0.18, y: 0.1, w: 0.52, h: 0.9 }, alt: "Gestão de treinos de uma aluna no painel ARKO" },
+  alimentacao: { rota: "alimentacao", mobile: { x: 0.45, y: 0.1, w: 0.53, h: 0.62 }, alt: "Plano alimentar com calorias, macros, água e templates de dieta no painel ARKO" },
+  medidas: { rota: "medidas", mobile: { x: 0.18, y: 0.1, w: 0.55, h: 0.9 }, alt: "Medidas corporais e detalhes da última avaliação no painel ARKO" },
+  chat: { rota: "chat", mobile: { x: 0.45, y: 0.1, w: 0.53, h: 0.9 }, alt: "Chat do painel ARKO com um treino concluído enviado pela aluna" },
+  desafios: { rota: "desafios", mobile: { x: 0.18, y: 0.1, w: 0.54, h: 0.66 }, alt: "Desafios em grupo criados pelo profissional no painel ARKO" },
+  modelos: { rota: "modelos", mobile: { x: 0.18, y: 0.18, w: 0.52, h: 0.66 }, alt: "Modelos de treino reutilizáveis no painel ARKO" },
 } as const;
 
 export type TelaPainel = keyof typeof TELAS_PAINEL;

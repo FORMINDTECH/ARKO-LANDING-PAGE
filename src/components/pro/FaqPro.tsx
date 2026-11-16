@@ -37,7 +37,7 @@ export default function FaqPro() {
   const [aberta, setAberta] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative scroll-mt-24 py-24 sm:py-32">
+    <section id="faq" className="relative scroll-mt-24 py-14 sm:py-24 lg:py-32">
       <Container>
         <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal>

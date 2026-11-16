@@ -45,7 +45,7 @@ export default function GestaoAlunos() {
   const atual = NOTAS.find((n) => n.id === ativa) ?? null;
 
   return (
-    <section id="alunos" className="relative py-24 sm:py-32">
+    <section id="alunos" className="relative py-14 sm:py-24 lg:py-32">
       <Container>
         <Titulo
           rotulo="01 · Gestão de alunos"
@@ -57,7 +57,7 @@ export default function GestaoAlunos() {
           apoio="É a primeira tela do seu dia: quem são seus alunos, como chegam até você e quem precisa de atenção."
         />
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_340px]">
+        <div className="mt-10 sm:mt-14 grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_340px]">
           {/* a tela, com o destaque do item da legenda */}
           <Reveal direction="scale" className="relative">
             <Browser tela="alunos">
@@ -123,7 +123,7 @@ export default function GestaoAlunos() {
 
             {/* o outro lado do dia: quem parou, vindo do dashboard */}
             <Reveal delay={400} direction="right">
-              <Recorte nome="atividade" rotulo="No dashboard: quem parou de treinar" sizes="340px" />
+              <Recorte nome="atividade" rotulo="No dashboard: quem parou de treinar" className="max-w-md" sizes="340px" />
             </Reveal>
           </div>
         </div>

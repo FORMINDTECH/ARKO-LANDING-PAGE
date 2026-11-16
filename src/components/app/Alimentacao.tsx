@@ -16,7 +16,7 @@ const DIA = [
 
 export default function Alimentacao() {
   return (
-    <section id="alimentacao" className="relative py-24 sm:py-32">
+    <section id="alimentacao" className="relative py-14 sm:py-24 lg:py-32">
       <Container>
         <Titulo
           rotulo="02 · Alimentação"
@@ -24,7 +24,7 @@ export default function Alimentacao() {
           apoio="Refeições, calorias e água no mesmo lugar, do lado dos treinos."
         />
 
-        <Reveal direction="scale" className="mt-14">
+        <Reveal direction="scale" className="mt-10 sm:mt-14">
           <div className="relative overflow-hidden rounded-[28px] bg-surface-2">
             <div className="grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
               {/* celular inteiro, flutuando sobre a luz */}

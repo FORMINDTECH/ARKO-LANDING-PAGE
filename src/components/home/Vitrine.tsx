@@ -24,7 +24,7 @@ export default function Vitrine() {
   const [lado, setLado] = useState<Lado>("app");
 
   return (
-    <section className="relative py-24 sm:py-32">
+    <section className="relative py-14 sm:py-24 lg:py-32">
       <Container>
         {/* âncora do "Ver por dentro": título, botões e bandeja ficam centralizados na tela */}
         <div id="produto" data-centralizar="">
@@ -74,16 +74,16 @@ export default function Vitrine() {
                     lado === "app" ? "opacity-100" : "pointer-events-none translate-y-6 opacity-0"
                   }`}
                 >
-                  <div className="flex w-full max-w-[780px] items-start justify-center gap-3 sm:gap-6">
+                  <div className="flex w-full max-w-[780px] items-start justify-center gap-0 sm:gap-6">
                     <Phone
                       tela="treinos"
-                      className="mt-[8%] w-[min(30%,220px)] -rotate-[5deg]"
+                      className="-mr-[7%] mt-[10%] w-[min(37%,220px)] -rotate-[5deg] sm:mr-0 sm:mt-[8%] sm:w-[min(30%,220px)]"
                       sizes="(min-width: 1024px) 250px, 30vw"
                     />
-                    <Phone tela="inicio" className="z-10 w-[min(36%,260px)]" sizes="(min-width: 1024px) 300px, 36vw" brilho />
+                    <Phone tela="inicio" className="z-10 w-[min(46%,260px)] sm:w-[min(36%,260px)]" sizes="(min-width: 1024px) 300px, 36vw" brilho />
                     <Phone
                       tela="alimentacao"
-                      className="mt-[8%] w-[min(30%,220px)] rotate-[5deg]"
+                      className="-ml-[7%] mt-[10%] w-[min(37%,220px)] rotate-[5deg] sm:ml-0 sm:mt-[8%] sm:w-[min(30%,220px)]"
                       sizes="(min-width: 1024px) 250px, 30vw"
                     />
                   </div>
@@ -94,11 +94,12 @@ export default function Vitrine() {
                   id="vitrine-painel"
                   role="tabpanel"
                   aria-hidden={lado !== "painel"}
-                  className={`col-start-1 row-start-1 flex items-start justify-center transition-[opacity,transform] duration-[900ms] ease-in-out ${
+                  className={`col-start-1 row-start-1 flex items-center justify-center pb-8 sm:items-start sm:pb-0 transition-[opacity,transform] duration-[900ms] ease-in-out ${
                     lado === "painel" ? "opacity-100" : "pointer-events-none translate-y-6 opacity-0"
                   }`}
                 >
-                  <Browser tela="treinos" className="w-full max-w-4xl" />
+                  {/* no celular: a tela de treinos inteira (sem o menu), sem cortar a coluna da direita */}
+                  <Browser tela="treinos" className="w-full max-w-4xl" recorte={{ x: 0.18, y: 0.1, w: 0.81, h: 0.88 }} />
                 </div>
               </div>
             </div>

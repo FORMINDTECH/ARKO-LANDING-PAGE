@@ -285,10 +285,6 @@ a:focus-visible > .seta {
   animation: esteira 60s linear infinite;
 }
 
-.esteira:hover {
-  animation-play-state: paused;
-}
-
 /* Celular flutuando, devagar, com um leve balanço */
 @keyframes boiar {
   0%,
@@ -364,5 +360,27 @@ a:focus-visible > .seta {
   .porta:hover,
   .porta:focus-visible {
     border-color: color-mix(in srgb, var(--color-accent) 60%, transparent);
+  }
+}
+
+/*
+ * Telas do painel no celular: recorte da área útil (ver AreaRecortada em devices/Browser.tsx).
+ * --rx/--ry/--rw/--rh são frações da captura; --ar-m é a proporção do recorte.
+ */
+.painel-recorte {
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 639px) {
+  .painel-recorte {
+    aspect-ratio: var(--ar-m);
+  }
+
+  .painel-recorte-interno {
+    position: absolute;
+    width: calc(100% / var(--rw));
+    left: calc(-100% * var(--rx) / var(--rw));
+    top: calc(-100% * var(--ry) / var(--rh));
   }
 }

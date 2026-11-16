@@ -16,7 +16,7 @@ const VIAS = [
 
 export default function Integracao() {
   return (
-    <section id="integracao" className="relative overflow-hidden py-24 sm:py-32">
+    <section id="integracao" className="relative overflow-hidden py-14 sm:py-24 lg:py-32">
       <Container>
         <Titulo
           centro
@@ -24,7 +24,7 @@ export default function Integracao() {
           titulo="Você no computador. O aluno no celular. A mesma conversa."
         />
 
-        <div className="relative mx-auto mt-16 max-w-6xl">
+        <div className="relative mx-auto mt-10 sm:mt-16 max-w-6xl">
           <Reveal direction="scale" className="pr-[18%] sm:pr-[22%]">
             <Browser tela="chat" />
           </Reveal>

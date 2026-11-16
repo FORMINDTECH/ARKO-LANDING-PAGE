@@ -11,7 +11,7 @@ import Titulo from "../ui/Titulo";
  */
 export default function Acompanhamento() {
   return (
-    <section id="acompanhamento" className="relative py-24 sm:py-32">
+    <section id="acompanhamento" className="relative py-14 sm:py-24 lg:py-32">
       <Container>
         <div className="grid gap-8 lg:grid-cols-2 lg:items-end">
           <Titulo
@@ -30,7 +30,7 @@ export default function Acompanhamento() {
           </Reveal>
         </div>
 
-        <div className="relative mt-14">
+        <div className="relative mt-10 sm:mt-14">
           <Reveal direction="scale" className="lg:w-[74%]">
             <Browser tela="medidas" />
           </Reveal>

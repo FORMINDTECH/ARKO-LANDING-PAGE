@@ -6,7 +6,7 @@ import { TELAS_APP, type TelaApp } from "../devices/telas";
 /**
  * Conceito: a "película" do app inteiro. As telas reais passam sozinhas, num carrossel
  * contínuo (a faixa é duplicada e anda metade da largura antes de recomeçar, sem salto).
- * Pausa com o mouse em cima.
+ * Roda sempre (não pausa com mouse nem toque; no celular, o toque deixava o hover preso e parava).
  *
  * A tela de calendário ficou de fora: o cartão "Desafios em grupo" vazio transborda no app
  * (altura fixa em ARKO-MOBILE/src/components/GruposDesafioCarousel.tsx). Volta quando corrigir.
@@ -30,7 +30,7 @@ function Faixa({ copia = false }: { copia?: boolean }) {
 
 export default function TodasAsTelas() {
   return (
-    <section className="relative overflow-hidden py-24 sm:py-32">
+    <section className="relative overflow-hidden py-14 sm:py-24 lg:py-32">
       <Container>
         <Titulo
           centro
@@ -40,7 +40,7 @@ export default function TodasAsTelas() {
         />
       </Container>
 
-      <div className="mascara-lados mt-16 overflow-hidden">
+      <div className="mascara-lados mt-10 sm:mt-16 overflow-hidden">
         <div className="esteira flex w-max">
           <Faixa />
           <Faixa copia />

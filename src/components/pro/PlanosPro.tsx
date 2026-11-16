@@ -30,7 +30,7 @@ export default function PlanosPro() {
   const total = calcularPrecoVagas(vagas, tipo);
 
   return (
-    <section id="planos" className="relative scroll-mt-24 py-24 sm:py-32">
+    <section id="planos" className="relative scroll-mt-24 py-14 sm:py-24 lg:py-32">
       <Container>
         <div className="grid gap-8 lg:grid-cols-2 lg:items-end">
           <Titulo
@@ -49,7 +49,7 @@ export default function PlanosPro() {
           </Reveal>
         </div>
 
-        <Reveal direction="scale" className="mt-14">
+        <Reveal direction="scale" className="mt-10 sm:mt-14">
           <div className="grid gap-2 rounded-[28px] bg-surface-2 p-2 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
             {/* calculadora */}
             <div className="card-inset flex flex-col justify-between gap-8 rounded-[22px] p-6 sm:p-9">

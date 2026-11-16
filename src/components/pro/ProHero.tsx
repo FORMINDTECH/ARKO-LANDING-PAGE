@@ -51,7 +51,7 @@ export default function ProHero() {
           </Reveal>
         </div>
 
-        <Reveal delay={200} direction="scale" className="relative mt-16 sm:mt-20">
+        <Reveal delay={200} direction="scale" className="relative mt-10 sm:mt-20">
           <Drift tilt={14} className="origin-bottom">
             <Browser tela="dashboard" eager sizes="(min-width: 1280px) 1216px, 96vw" />
           </Drift>
