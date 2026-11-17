@@ -9,46 +9,43 @@ import Titulo from "../ui/Titulo";
 
 /**
  * Substitui os quatro flip cards da landing antiga. Conceito: a tela real de alunos, grande,
- * anotada como um manual. Marcadores numerados ficam sobre a própria interface e a legenda
- * ao lado está sempre visível; passar o mouse (ou o foco) numa legenda acende o marcador.
- * Coordenadas em % da captura alunos (2880 × 1620).
+ * explicada pela legenda ao lado (sempre visível). Passar o mouse, focar ou tocar num item da
+ * legenda contorna o elemento correspondente na própria interface e escurece o resto da tela.
+ * Caixas em % da captura alunos (2880 × 1620): x, y, largura, altura.
  */
 const NOTAS = [
   {
-    n: 1,
-    x: 78.5,
-    y: 17.5,
+    id: "convite",
+    caixa: { x: 79.3, y: 14.2, w: 17.3, h: 7.2 },
     titulo: "Código de convite",
     texto: "Mande o link para o próximo aluno. Ao abrir, ele já fica vinculado a você.",
   },
   {
-    n: 2,
-    x: 84.5,
-    y: 30,
+    id: "cadastro",
+    caixa: { x: 84.3, y: 29.0, w: 12.2, h: 7.0 },
     titulo: "Cadastro manual",
     texto: "Cadastre também quem ainda não instalou o app.",
   },
   {
-    n: 3,
-    x: 20.6,
-    y: 30,
+    id: "busca",
+    caixa: { x: 20.2, y: 29.0, w: 63.6, h: 7.0 },
     titulo: "Todos numa lista",
     texto: "Busque por nome ou e-mail e chegue a qualquer aluno em segundos.",
   },
   {
-    n: 4,
-    x: 41,
-    y: 85.3,
+    id: "sem-app",
+    caixa: { x: 24.6, y: 83.2, w: 16.6, h: 6.8 },
     titulo: "Quem está sem app",
     texto: "Alunos cadastrados à mão aparecem marcados, para você saber quem ainda falta convidar.",
   },
 ];
 
 export default function GestaoAlunos() {
-  const [ativa, setAtiva] = useState<number | null>(null);
+  const [ativa, setAtiva] = useState<string | null>(null);
+  const atual = NOTAS.find((n) => n.id === ativa) ?? null;
 
   return (
-    <section id="alunos" className="relative py-24 sm:py-32">
+    <section id="alunos" className="relative py-14 sm:py-24 lg:py-32">
       <Container>
         <Titulo
           rotulo="01 · Gestão de alunos"
@@ -60,63 +57,73 @@ export default function GestaoAlunos() {
           apoio="É a primeira tela do seu dia: quem são seus alunos, como chegam até você e quem precisa de atenção."
         />
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_340px]">
-          {/* tela anotada */}
+        <div className="mt-10 sm:mt-14 grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_340px]">
+          {/* a tela, com o destaque do item da legenda */}
           <Reveal direction="scale" className="relative">
             <Browser tela="alunos">
-              <div className="relative">
-                <PainelImagem tela="alunos" sizes="(min-width: 1280px) 860px, 96vw" />
-                {NOTAS.map((nota) => (
-                  <span
-                    key={nota.n}
-                    aria-hidden
-                    className={`absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full font-data text-[11px] font-semibold transition-[transform,background-color,box-shadow] duration-300 sm:h-8 sm:w-8 sm:text-xs ${
-                      ativa === nota.n
-                        ? "scale-125 bg-accent text-[#0b0b0c] shadow-[0_0_0_6px_rgba(253,130,15,0.25)]"
-                        : "bg-accent text-[#0b0b0c] shadow-[0_0_0_4px_rgba(253,130,15,0.18)]"
-                    }`}
-                    style={{ left: `${nota.x}%`, top: `${nota.y}%` }}
-                  >
-                    {nota.n}
-                  </span>
-                ))}
+              <div className="relative overflow-hidden">
+                <PainelImagem tela="alunos" />
+                {/*
+                  Uma caixa só, que desliza de um elemento para o outro. A sombra gigante escurece
+                  o resto da tela (efeito de holofote); a borda laranja contorna o elemento.
+                */}
+                <span
+                  aria-hidden
+                  className={`pointer-events-none absolute rounded-[10px] border-2 border-accent transition-[left,top,width,height,opacity,box-shadow] duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                    atual
+                      ? "opacity-100 shadow-[0_0_0_9999px_rgba(0,0,0,0.42),0_0_24px_rgba(253,130,15,0.45)]"
+                      : "opacity-0 shadow-[0_0_0_9999px_rgba(0,0,0,0)]"
+                  }`}
+                  style={{
+                    left: `${(atual ?? NOTAS[0]).caixa.x}%`,
+                    top: `${(atual ?? NOTAS[0]).caixa.y}%`,
+                    width: `${(atual ?? NOTAS[0]).caixa.w}%`,
+                    height: `${(atual ?? NOTAS[0]).caixa.h}%`,
+                  }}
+                />
               </div>
             </Browser>
-
           </Reveal>
 
           {/* legenda sempre visível */}
           <div className="flex flex-col gap-10 self-start">
-          <ol className="flex flex-col divide-y divide-line border-y border-line">
-            {NOTAS.map((nota, i) => (
-              <Reveal as="li" key={nota.n} delay={i * 100} direction="right">
-                <div
-                  tabIndex={0}
-                  onMouseEnter={() => setAtiva(nota.n)}
-                  onMouseLeave={() => setAtiva(null)}
-                  onFocus={() => setAtiva(nota.n)}
-                  onBlur={() => setAtiva(null)}
-                  className="group flex gap-4 py-5 outline-none"
-                >
-                  <span
-                    className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border font-data text-xs font-semibold transition-colors duration-300 ${
-                      ativa === nota.n ? "border-accent bg-accent text-[#0b0b0c]" : "border-accent/60 text-accent"
-                    }`}
-                  >
-                    {nota.n}
-                  </span>
-                  <div>
-                    <h3 className="font-sans text-base font-semibold text-ink [font-stretch:100%]">{nota.titulo}</h3>
-                    <p className="mt-1 text-sm leading-relaxed text-ink-muted">{nota.texto}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </ol>
+            <ul onMouseLeave={() => setAtiva(null)} className="flex flex-col divide-y divide-line border-y border-line">
+              {NOTAS.map((nota, i) => {
+                const on = ativa === nota.id;
+                return (
+                  <Reveal as="li" key={nota.id} delay={i * 100} direction="right">
+                    <button
+                      type="button"
+                      aria-pressed={on}
+                      onMouseEnter={() => setAtiva(nota.id)}
+                      onFocus={() => setAtiva(nota.id)}
+                      onBlur={() => setAtiva(null)}
+                      onClick={() => setAtiva(on ? null : nota.id)}
+                      className="relative w-full py-5 pl-5 text-left outline-none"
+                    >
+                      <span
+                        aria-hidden
+                        className={`absolute inset-y-4 left-0 w-1 origin-center rounded-full bg-accent transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                          on ? "scale-y-100" : "scale-y-0"
+                        }`}
+                      />
+                      <span
+                        className={`block font-sans text-base font-semibold transition-colors duration-300 ${
+                          on ? "text-accent" : "text-ink"
+                        }`}
+                      >
+                        {nota.titulo}
+                      </span>
+                      <span className="mt-1 block text-sm leading-relaxed text-ink-muted">{nota.texto}</span>
+                    </button>
+                  </Reveal>
+                );
+              })}
+            </ul>
 
             {/* o outro lado do dia: quem parou, vindo do dashboard */}
             <Reveal delay={400} direction="right">
-              <Recorte nome="atividade" rotulo="No dashboard: quem parou de treinar" sizes="340px" />
+              <Recorte nome="atividade" rotulo="No dashboard: quem parou de treinar" className="max-w-md" sizes="340px" />
             </Reveal>
           </div>
         </div>

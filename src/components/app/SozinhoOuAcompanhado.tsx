@@ -22,14 +22,14 @@ const LIBERA = [
 
 export default function SozinhoOuAcompanhado() {
   return (
-    <section id="planos" className="relative scroll-mt-24 py-24 sm:py-32">
+    <section id="planos" className="relative scroll-mt-24 py-14 sm:py-24 lg:py-32">
       <Container>
         <Titulo
           rotulo="05 · Do seu jeito"
           titulo="Você não precisa de um profissional para usar. Mas pode ter um."
         />
 
-        <div className="mt-14 grid gap-4 lg:grid-cols-2 lg:gap-5">
+        <div className="mt-10 sm:mt-14 grid gap-4 lg:grid-cols-2 lg:gap-5">
           {/* Por conta própria */}
           <Reveal direction="left" className="flex flex-col rounded-[28px] bg-surface-2 p-7 sm:p-10">
             <p className="eyebrow">Por conta própria</p>
@@ -50,13 +50,14 @@ export default function SozinhoOuAcompanhado() {
                       {p.nome}
                     </th>
                     <td className="py-4 text-right">
-                      <span className="font-data text-lg font-semibold text-ink">R$ {brl(p.preco)}</span>
+                      {/* no celular, o equivalente mensal vai para a linha de baixo */}
+                      <span className="whitespace-nowrap font-data text-lg font-semibold text-ink">R$ {brl(p.preco)}</span>
                       {p.meses > 1 ? (
-                        <span className="ml-2 font-data text-xs text-ink-muted">
+                        <span className="block whitespace-nowrap font-data text-xs text-ink-muted sm:ml-2 sm:inline">
                           ≈ R$ {brl(p.preco / p.meses)}/mês
                         </span>
                       ) : (
-                        <span className="ml-2 font-data text-xs text-ink-muted">/mês</span>
+                        <span className="block font-data text-xs text-ink-muted sm:ml-2 sm:inline">/mês</span>
                       )}
                     </td>
                   </tr>

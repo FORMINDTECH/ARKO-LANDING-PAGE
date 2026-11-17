@@ -19,13 +19,14 @@ function Play({ className }: { className?: string }) {
   );
 }
 
+// No celular os dois botões dividem a linha (flex-1); a partir de 640 px têm largura própria.
 const BASE =
-  "group inline-flex h-[54px] min-w-[170px] items-center gap-3 rounded-xl px-4 transition-[border-color,transform] duration-300 ease-out";
+  "group inline-flex h-[52px] min-w-0 flex-1 items-center gap-2.5 rounded-xl px-3 transition-[border-color,transform] duration-300 ease-out sm:h-[54px] sm:min-w-[170px] sm:flex-none sm:gap-3 sm:px-4";
 
 /** Botões das lojas. Sem link da App Store (ainda não publicado), o botão aparece como "em breve". */
 export default function BotoesLoja({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex flex-wrap items-center gap-3 ${className}`}>
+    <div className={`flex items-center gap-2.5 sm:flex-wrap sm:gap-3 ${className}`}>
       <a
         href={GOOGLE_PLAY_URL}
         target="_blank"
@@ -35,7 +36,7 @@ export default function BotoesLoja({ className = "" }: { className?: string }) {
         <Play className="h-6 w-6 shrink-0" />
         <span className="flex flex-col leading-none">
           <span className="text-[10px] font-semibold uppercase tracking-wide text-ink-muted">Disponível no</span>
-          <span className="mt-1 text-[1.05rem] font-bold tracking-tight">Google Play</span>
+          <span className="mt-1 whitespace-nowrap text-[0.95rem] font-bold tracking-tight sm:text-[1.05rem]">Google Play</span>
         </span>
       </a>
       {APP_STORE_URL ? (
@@ -48,7 +49,7 @@ export default function BotoesLoja({ className = "" }: { className?: string }) {
           <Apple className="h-6 w-6 shrink-0" />
           <span className="flex flex-col leading-none">
             <span className="text-[10px] font-semibold uppercase tracking-wide text-ink-muted">Baixar na</span>
-            <span className="mt-1 text-[1.05rem] font-bold tracking-tight">App Store</span>
+            <span className="mt-1 whitespace-nowrap text-[0.95rem] font-bold tracking-tight sm:text-[1.05rem]">App Store</span>
           </span>
         </a>
       ) : (
@@ -56,7 +57,7 @@ export default function BotoesLoja({ className = "" }: { className?: string }) {
           <Apple className="h-6 w-6 shrink-0 opacity-70" />
           <span className="flex flex-col leading-none">
             <span className="text-[10px] font-semibold uppercase tracking-wide">Em breve na</span>
-            <span className="mt-1 text-[1.05rem] font-bold tracking-tight">App Store</span>
+            <span className="mt-1 whitespace-nowrap text-[0.95rem] font-bold tracking-tight sm:text-[1.05rem]">App Store</span>
           </span>
         </span>
       )}

@@ -19,7 +19,7 @@ const LEITURAS = [
 
 export default function Evolucao() {
   return (
-    <section id="evolucao" className="relative py-24 sm:py-32">
+    <section id="evolucao" className="relative py-14 sm:py-24 lg:py-32">
       <Container>
         <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-10">
           <div>

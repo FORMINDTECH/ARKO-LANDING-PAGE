@@ -37,11 +37,11 @@ const ETAPAS: { quem: string; titulo: string; texto: string; recorte: NomeRecort
 
 export default function Fluxo() {
   return (
-    <section className="relative py-24 sm:py-32">
+    <section className="relative py-14 sm:py-24 lg:py-32">
       <Container>
         <Titulo rotulo="05 · Do convite ao resultado" titulo="Seu fluxo de trabalho, de ponta a ponta." />
 
-        <Reveal className="relative mt-16">
+        <Reveal className="relative mt-10 sm:mt-16">
           <div aria-hidden className="linha-desenha absolute left-0 right-0 top-[15px] hidden h-px bg-accent/60 lg:block" />
           <ol className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
             {ETAPAS.map((e, i) => (

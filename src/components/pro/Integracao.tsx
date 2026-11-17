@@ -16,21 +16,21 @@ const VIAS = [
 
 export default function Integracao() {
   return (
-    <section id="integracao" className="relative overflow-hidden py-24 sm:py-32">
+    <section id="integracao" className="relative overflow-hidden py-14 sm:py-24 lg:py-32">
       <Container>
         <Titulo
           centro
-          rotulo="04 · Integrado ao app"
+          rotulo="04 · Integrado ao app do aluno"
           titulo="Você no computador. O aluno no celular. A mesma conversa."
         />
 
-        <div className="relative mx-auto mt-16 max-w-6xl">
+        <div className="relative mx-auto mt-10 sm:mt-16 max-w-6xl">
           <Reveal direction="scale" className="pr-[18%] sm:pr-[22%]">
             <Browser tela="chat" />
           </Reveal>
           <Drift y={-50} className="absolute bottom-[-8%] right-0 w-[26%] max-w-[270px]">
             <Reveal delay={200} direction="right">
-              <Phone tela="treinos" sizes="(min-width: 1024px) 270px, 26vw" brilho />
+              <Phone tela="treinoLista" brilho />
             </Reveal>
           </Drift>
         </div>

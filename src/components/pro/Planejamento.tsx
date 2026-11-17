@@ -39,7 +39,7 @@ export default function Planejamento() {
   const [ativa, setAtiva] = useState(0);
 
   return (
-    <section id="planejamento" className="relative scroll-mt-24 py-24 sm:py-32">
+    <section id="planejamento" className="relative scroll-mt-24 py-14 sm:py-24 lg:py-32">
       <Container>
         <Titulo
           rotulo="02 · Planejamento"
@@ -47,7 +47,7 @@ export default function Planejamento() {
           apoio="Treino, dieta, modelos e desafios ficam no computador, onde dá para trabalhar com calma."
         />
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[340px_minmax(0,1fr)]">
+        <div className="mt-10 sm:mt-14 grid gap-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[340px_minmax(0,1fr)]">
           {/* índice: no celular vira uma fileira rolável */}
           <Reveal direction="left" className="min-w-0">
             <div role="tablist" aria-label="Partes do planejamento" className="sem-barra -mx-6 flex gap-2 overflow-x-auto px-6 pb-1 lg:mx-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0">

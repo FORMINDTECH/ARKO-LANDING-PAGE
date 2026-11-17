@@ -68,7 +68,7 @@ export default function Header() {
               <Logo className="h-6 w-auto sm:h-7" eager />
             </Link>
 
-            <nav aria-label="Principal" className="hidden items-center gap-1 md:flex">
+            <nav aria-label="Principal" className="hidden items-center gap-1 lg:flex">
               {NAV.map((link) => {
                 const ativo = pathname.startsWith(link.href);
                 return (
@@ -119,7 +119,7 @@ export default function Header() {
                 aria-label={open ? "Fechar menu" : "Abrir menu"}
                 aria-expanded={open}
                 onClick={() => setOpen((v) => !v)}
-                className="flex h-10 w-10 items-center justify-center rounded-lg text-ink transition-colors hover:bg-surface-2 md:hidden"
+                className="flex h-10 w-10 items-center justify-center rounded-lg text-ink transition-colors hover:bg-surface-2 lg:hidden"
               >
                 {open ? <X className="h-5 w-5" strokeWidth={2} /> : <Menu className="h-5 w-5" strokeWidth={2} />}
               </button>
@@ -127,7 +127,7 @@ export default function Header() {
           </div>
 
           <div
-            className={`grid overflow-hidden transition-[grid-template-rows] duration-300 ease-out md:hidden ${
+            className={`grid overflow-hidden transition-[grid-template-rows] duration-300 ease-out lg:hidden ${
               open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
             }`}
           >

@@ -57,7 +57,7 @@ function Fluxo({ sentido, rotulo, texto }: { sentido: "direita" | "esquerda"; ro
 
 export default function DuasExperiencias() {
   return (
-    <section className="relative py-24 sm:py-32">
+    <section className="relative py-14 sm:py-24 lg:py-32">
       <Container>
         <Titulo
           rotulo="Como se encaixam"
@@ -70,7 +70,7 @@ export default function DuasExperiencias() {
           embaixo, celular, setas e painel centralizados na mesma altura.
           Celular: cada lado empilhado (texto e aparelho), com as setas entre eles.
         */}
-        <div className="mt-16 grid gap-x-6 gap-y-10 lg:grid-cols-[minmax(0,3.6fr)_minmax(0,2fr)_minmax(0,6.4fr)] lg:gap-y-12">
+        <div className="mt-10 sm:mt-16 grid gap-x-6 gap-y-10 lg:grid-cols-[minmax(0,3.6fr)_minmax(0,2fr)_minmax(0,6.4fr)] lg:gap-y-12">
           {/* Quem treina: texto */}
           <Reveal direction="left" className="lg:col-start-1 lg:row-start-1">
             <p className="eyebrow">No celular</p>

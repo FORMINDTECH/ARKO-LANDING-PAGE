@@ -28,9 +28,10 @@ export default function Ampliavel({
         ) : (
           <>
             {children}
-            <span className="pointer-events-none absolute bottom-3 right-3 z-20 flex items-center gap-1.5 rounded-full bg-black/70 px-3 py-1.5 text-[11px] font-semibold text-white opacity-90 backdrop-blur transition-opacity group-hover/amp:opacity-100 sm:opacity-0">
+            {/* no celular: só o ícone, pequeno e discreto; no desktop: com texto, aparece no hover */}
+            <span className="pointer-events-none absolute bottom-2 right-2 z-20 flex h-7 w-7 items-center justify-center rounded-full bg-black/55 text-white/90 backdrop-blur transition-opacity group-hover/amp:opacity-100 sm:bottom-3 sm:right-3 sm:h-auto sm:w-auto sm:gap-1.5 sm:bg-black/70 sm:px-3 sm:py-1.5 sm:text-[11px] sm:font-semibold sm:opacity-0">
               <Maximize2 className="h-3 w-3" strokeWidth={2.5} />
-              Ampliar
+              <span className="hidden sm:inline">Ampliar</span>
             </span>
           </>
         )

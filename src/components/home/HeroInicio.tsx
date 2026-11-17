@@ -5,6 +5,7 @@ import Drift from "../Drift";
 import Logo from "../Logo";
 import Browser from "../devices/Browser";
 import Phone from "../devices/Phone";
+import MascoteAnimado from "../MascoteAnimado";
 
 /**
  * Hero da página inicial. O texto explica o que o ARKO faz (treino, alimentação e evolução);
@@ -12,7 +13,7 @@ import Phone from "../devices/Phone";
  */
 export default function HeroInicio() {
   return (
-    <section className="relative overflow-hidden pb-20 pt-32 sm:pb-28 sm:pt-40 lg:min-h-[100svh] lg:pb-24">
+    <section className="relative overflow-hidden pb-12 pt-28 sm:pb-28 sm:pt-40 lg:min-h-[100svh] lg:pb-24">
       {/* luz âmbar atrás da composição, como o brilho de LED da splash */}
       <div
         aria-hidden
@@ -22,8 +23,11 @@ export default function HeroInicio() {
       <Container className="relative">
         <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-4">
           <Reveal direction="left" className="relative z-10 max-w-xl">
-            <Logo className="h-12 w-auto sm:h-14" eager />
-            <h1 className="mt-7 text-[2.35rem] font-extrabold leading-[1.02] tracking-tight text-ink text-balance sm:text-5xl lg:text-[3.5rem]">
+            {/* no celular o logo já está no cabeçalho, logo acima: aparece só a partir de 640 px */}
+            <div className="hidden sm:block">
+              <Logo className="h-14 w-auto" eager />
+            </div>
+            <h1 className="sm:mt-7 text-[2.35rem] font-extrabold leading-[1.02] tracking-tight text-ink text-balance sm:text-5xl lg:text-[3.5rem]">
               Treino, dieta e evolução <span className="text-accent">no mesmo app</span>.
             </h1>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink-muted">
@@ -48,15 +52,27 @@ export default function HeroInicio() {
             </div>
           </Reveal>
 
-          {/* Composição: painel grande ao fundo, celular na frente */}
+          {/* Composição: painel grande ao fundo, celular na frente e o mascote no canto */}
           <Reveal delay={150} direction="right" className="relative">
-            <div className="relative mx-auto max-w-[680px] pb-[10%] pl-[10%] lg:mr-[-22%] lg:max-w-none">
+            <div className="relative mx-auto max-w-[680px] pb-[14%] pl-[24%] sm:pb-[10%] sm:pl-[10%] lg:mr-[-22%] lg:max-w-none">
               <Drift y={-24}>
-                <Browser tela="dashboard" eager sizes="(min-width: 1024px) 900px, 92vw" />
+                {/* no celular, recorte com os números e a atividade dos alunos */}
+                <Browser tela="dashboard" eager recorte={{ x: 0.18, y: 0.1, w: 0.62, h: 0.6 }} />
               </Drift>
 
-              <Drift y={36} className="absolute bottom-0 left-0 w-[22%] min-w-[120px] max-w-[230px]">
+              <Drift y={36} className="absolute bottom-0 left-0 w-[34%] max-w-[230px] sm:w-[22%]">
                 <Phone tela="inicio" eager brilho />
+              </Drift>
+
+              {/* o mascote de óculos, encostado no canto do painel, já recebe quem chega */}
+              <Drift y={-40} className="absolute -bottom-[6%] right-0 z-10 w-[26%] max-w-[200px] sm:right-[2%] sm:w-[20%] lg:right-[24%] lg:w-[15%]">
+                <MascoteAnimado
+                  video="/brand/mascote/oculos-brilho.webm"
+                  poster="/brand/mascote/oculos-brilho.webp"
+                  largura={638}
+                  altura={864}
+                  alt="Mascote do ARKO de óculos escuros"
+                />
               </Drift>
             </div>
           </Reveal>

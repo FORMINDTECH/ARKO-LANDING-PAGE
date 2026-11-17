@@ -10,7 +10,7 @@ const FAQS = [
   {
     pergunta: "Como funciona o modelo de vagas?",
     resposta:
-      "Você contrata vagas de aluno. Cada vaga cobre um aluno por 30 dias e, enquanto ela estiver ativa, ele usa o app completo sem custo. O preço escala por faixa: quanto mais vagas, menor o custo de cada uma.",
+      "Você contrata vagas de aluno, a partir de 3. Cada vaga cobre um aluno por 30 dias e, enquanto ela estiver ativa, ele usa o app completo sem custo. Para personal e nutricionista, são R$ 9,90 por aluno até 100 vagas e R$ 8,90 a partir do 101º. Para consultoria, R$ 11,90 e R$ 10,90.",
   },
   {
     pergunta: "O que acontece se eu não renovar as vagas?",
@@ -37,7 +37,7 @@ export default function FaqPro() {
   const [aberta, setAberta] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative scroll-mt-24 py-24 sm:py-32">
+    <section id="faq" className="relative scroll-mt-24 py-14 sm:py-24 lg:py-32">
       <Container>
         <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal>

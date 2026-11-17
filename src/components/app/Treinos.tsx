@@ -2,12 +2,12 @@ import Container from "../Container";
 import Reveal from "../Reveal";
 import Drift from "../Drift";
 import Phone from "../devices/Phone";
-import Recorte from "../devices/Recorte";
 import Titulo from "../ui/Titulo";
 
 /**
- * Conceito: o cartão "salta" de dentro do celular. A lista de treinos real no aparelho e o
- * cartão do Treino A ampliado por cima, saindo da tela. Ao lado, uma ficha técnica em linhas
+ * Conceito: da lista ao treino rodando. Atrás, a lista de treinos; na frente, o mesmo Treino A
+ * em andamento no modo lista (cronômetro, botão de pausar, séries concluídas e os próximos
+ * exercícios). Ao lado, uma ficha técnica em linhas
  * (o jeito que o dossiê usa a mono para dados de treino), em vez de cartões com ícone.
  */
 const FICHA = [
@@ -18,7 +18,7 @@ const FICHA = [
 
 export default function Treinos() {
   return (
-    <section id="treinos" className="relative py-24 sm:py-32">
+    <section id="treinos" className="relative py-14 sm:py-24 lg:py-32">
       <Container>
         <div className="grid items-center gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
           <div>
@@ -43,16 +43,22 @@ export default function Treinos() {
             </Reveal>
           </div>
 
-          <Reveal direction="right" className="relative mx-auto w-full max-w-[480px]">
-            <div className="relative ml-auto w-[64%] sm:mr-[6%]">
-              <Phone tela="treinos" sizes="(min-width: 1024px) 300px, 60vw" brilho />
+          {/* da lista ao treino rodando: a lista atrás, o descanso entre séries na frente */}
+          <Reveal direction="right" className="relative mx-auto w-full max-w-[500px]">
+            <div className="relative mx-auto aspect-[1/1.12] w-full">
+              <Drift y={30} rotate={-1} className="absolute left-0 top-[6%] w-[44%]">
+                <p className="mb-3 text-center font-data text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-muted">
+                  Escolha o treino
+                </p>
+                <Phone tela="treinos" className="w-full -rotate-[5deg] opacity-90" />
+              </Drift>
+              <Drift y={-30} className="absolute right-0 top-0 z-10 w-[54%]">
+                <p className="mb-3 text-center font-data text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
+                  Treino rodando
+                </p>
+                <Phone tela="treinoLista" />
+              </Drift>
             </div>
-            {/* o cartão real, ampliado, saindo da tela */}
-            <Drift y={-36} className="absolute left-0 top-[16%] z-10 w-[72%]">
-              <div className="rotate-[-3deg]">
-                <Recorte nome="treino" sizes="(min-width: 1024px) 340px, 70vw" />
-              </div>
-            </Drift>
           </Reveal>
         </div>
       </Container>

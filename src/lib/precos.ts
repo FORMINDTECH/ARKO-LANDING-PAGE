@@ -1,44 +1,30 @@
-// Espelha a API (API-ARKO, src/services/vinculoService.ts) e o painel (ARKO-WEB, src/utils/precoVagas.js).
-// É só para exibir: o valor cobrado de verdade é sempre calculado pela API.
+// Preço das vagas do profissional (decisão do Douglas em 2026-11-15), por mês e por aluno:
+//   - personal e nutricionista: R$ 9,90 até 100 vagas; a partir do 101º aluno, R$ 8,90;
+//   - consultoria: R$ 11,90 até 100 vagas; a partir do 101º aluno, R$ 10,90;
+//   - mínimo de 3 vagas para começar.
+// É só para exibir. Atenção: a API (API-ARKO, src/services/vinculoService.ts) e o painel
+// (ARKO-WEB, src/utils/precoVagas.js) ainda calculam pela tabela antiga até serem atualizados.
 
-export type Faixa = { vagas: number; preco: number };
+export type TipoProfissional = "personal" | "consultoria";
 
-export const TIERS_PERSONAL_NUTRI: Faixa[] = [
-  { vagas: 5, preco: 49.9 },
-  { vagas: 20, preco: 179.9 },
-  { vagas: 50, preco: 449.9 },
-  { vagas: 100, preco: 890.9 },
-];
+export const PRECOS_VAGA: Record<TipoProfissional, { nome: string; cheio: number; extra: number }> = {
+  personal: { nome: "Personal ou nutricionista", cheio: 9.9, extra: 8.9 },
+  consultoria: { nome: "Consultoria", cheio: 11.9, extra: 10.9 },
+};
 
-export const TIERS_CONSULTORIA: Faixa[] = [
-  { vagas: 5, preco: 59.9 },
-  { vagas: 20, preco: 215.9 },
-  { vagas: 50, preco: 539.9 },
-  { vagas: 100, preco: 1068.9 },
-];
-
+/** Até aqui vale o preço cheio; daqui para cima, o preço extra. */
+export const LIMITE_PRECO_CHEIO = 100;
+export const MIN_VAGAS = 3;
+/** Teto do seletor da calculadora (não é limite de compra). */
 export const MAX_VAGAS = 200;
 
-/** Cada âncora é um preço fechado; entre âncoras o preço cresce linearmente. */
-export function calcularPrecoPorTiers(vagas: number, tiers: Faixa[]): number {
-  const primeiro = tiers[0];
-  if (vagas <= primeiro.vagas) {
-    if (vagas === primeiro.vagas) return primeiro.preco;
-    return vagas * (primeiro.preco / primeiro.vagas);
-  }
-  for (let i = 1; i < tiers.length; i++) {
-    const anterior = tiers[i - 1];
-    const atual = tiers[i];
-    if (vagas <= atual.vagas) {
-      if (vagas === atual.vagas) return atual.preco;
-      const extra = (atual.preco - anterior.preco) / (atual.vagas - anterior.vagas);
-      return anterior.preco + (vagas - anterior.vagas) * extra;
-    }
-  }
-  const ultimo = tiers[tiers.length - 1];
-  const penultimo = tiers[tiers.length - 2];
-  const extra = (ultimo.preco - penultimo.preco) / (ultimo.vagas - penultimo.vagas);
-  return ultimo.preco + (vagas - ultimo.vagas) * extra;
+/** Total mensal para `vagas` alunos (respeita o mínimo de 3). */
+export function calcularPrecoVagas(vagas: number, tipo: TipoProfissional = "personal"): number {
+  const { cheio, extra } = PRECOS_VAGA[tipo];
+  const n = Math.max(MIN_VAGAS, Math.round(vagas));
+  const cheias = Math.min(n, LIMITE_PRECO_CHEIO);
+  const extras = Math.max(0, n - LIMITE_PRECO_CHEIO);
+  return cheias * cheio + extras * extra;
 }
 
 /** Planos do praticante independente (API: PLANOS_ALUNO_INDEPENDENTE). Cobrança pela loja. */
