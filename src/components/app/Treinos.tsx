@@ -11,7 +11,7 @@ import Titulo from "../ui/Titulo";
  * (o jeito que o dossiê usa a mono para dados de treino), em vez de cartões com ícone.
  */
 const FICHA = [
-  { rotulo: "Montar", texto: "Do zero (musculação, cardio ou alongamento) ou gerado com IA em poucos toques." },
+  { rotulo: "Montar", texto: "Do zero, com os exercícios que você escolher: musculação, cardio ou alongamento." },
   { rotulo: "Executar", texto: "Série por série, com cronômetro de descanso. No cardio, o percurso pelo GPS." },
   { rotulo: "Fechar", texto: "Ao terminar, guarde fotos do treino e publique no feed, se quiser." },
 ];

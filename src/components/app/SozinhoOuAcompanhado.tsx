@@ -14,7 +14,7 @@ import { DIAS_TESTE_GRATIS, PLANOS_INDEPENDENTE, brl } from "@/lib/precos";
 const LIBERA = [
   "Gráficos de evolução e carga",
   "Calendário e sequência",
-  "Treinos gerados com IA",
+  "Relatórios gerados com IA",
   "Treinos sem limite",
   "Leitor de código de barras",
   "Ranking de sequência",

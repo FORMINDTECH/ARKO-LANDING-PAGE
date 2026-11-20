@@ -125,16 +125,10 @@ export default function Browser({
       label="Ampliar tela do painel"
       // ampliado: o maior possível sem passar da altura da tela (16:9 + barra de endereço)
       ampliado={
-        // No celular, a tela inteira em 94vw ficaria ilegível: ela abre em 900 px de largura e
-        // rola para o lado. A partir de 640 px, cabe inteira na tela.
-        <div>
-          <p className="sticky left-0 mb-3 w-[min(100vw-2rem,360px)] text-center text-xs text-white/70 sm:hidden">
-            Arraste para o lado para ver a tela inteira
-          </p>
-          <Janela rota={rota} className="w-[900px] sm:w-[min(94vw,1500px,calc((88vh_-_48px)*1.7778))]">
-            {conteudo}
-          </Janela>
-        </div>
+        // Em pé e inteira, na maior largura que cabe na tela (no celular, a largura toda).
+        <Janela rota={rota} className="w-[min(100vw_-_2rem,1500px,calc((88vh_-_48px)*1.7778))] sm:w-[min(94vw,1500px,calc((88vh_-_48px)*1.7778))]">
+          {conteudo}
+        </Janela>
       }
     >
       {janela}

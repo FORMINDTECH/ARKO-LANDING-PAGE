@@ -100,7 +100,7 @@ export default function Expandable({
               </button>
               <div
                 data-lenis-prevent
-                className="max-h-[88vh] max-w-full overflow-auto overscroll-contain sm:max-w-[92vw]"
+                className="sem-barra max-h-[88vh] max-w-full overflow-auto overscroll-contain sm:max-w-[94vw]"
                 onClick={(e) => e.stopPropagation()}
                 style={{
                   opacity: visivel ? 1 : 0,

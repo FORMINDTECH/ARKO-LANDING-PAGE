@@ -48,9 +48,9 @@ export default function Planejamento() {
         />
 
         <div className="mt-10 sm:mt-14 grid gap-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[340px_minmax(0,1fr)]">
-          {/* índice: no celular vira uma fileira rolável */}
+          {/* índice: no celular e no tablet vira uma grade 2 x 2, com tudo à vista */}
           <Reveal direction="left" className="min-w-0">
-            <div role="tablist" aria-label="Partes do planejamento" className="sem-barra -mx-6 flex gap-2 overflow-x-auto px-6 pb-1 lg:mx-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0">
+            <div role="tablist" aria-label="Partes do planejamento" className="grid grid-cols-2 gap-2 lg:flex lg:flex-col lg:gap-1">
               {ETAPAS.map((e, i) => {
                 const on = ativa === i;
                 return (
@@ -63,8 +63,8 @@ export default function Planejamento() {
                     onMouseEnter={() => setAtiva(i)}
                     onFocus={() => setAtiva(i)}
                     onClick={() => setAtiva(i)}
-                    className={`relative shrink-0 cursor-pointer rounded-2xl px-5 py-3 text-left transition-colors duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent lg:py-5 lg:pl-7 ${
-                      on ? "bg-surface-2" : "hover:bg-surface-2/60"
+                    className={`relative min-w-0 cursor-pointer rounded-xl border px-3.5 py-3 text-left transition-colors duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:px-5 lg:rounded-2xl lg:border-0 lg:py-5 lg:pl-7 ${
+                      on ? "border-accent/60 bg-surface-2" : "border-line/60 hover:bg-surface-2/60"
                     }`}
                   >
                     <span
@@ -72,11 +72,11 @@ export default function Planejamento() {
                         on ? "scale-y-100" : "scale-y-0"
                       }`}
                     />
-                    <span className="flex items-baseline gap-3">
+                    <span className="flex items-baseline gap-2 sm:gap-3">
                       <span className={`font-data text-xs font-semibold ${on ? "text-accent" : "text-ink-muted"}`}>
                         0{i + 1}
                       </span>
-                      <span className={`whitespace-nowrap text-base font-semibold transition-colors ${on ? "text-ink" : "text-ink-muted"}`}>
+                      <span className={`text-sm font-semibold leading-snug transition-colors sm:text-base lg:whitespace-nowrap ${on ? "text-ink" : "text-ink-muted"}`}>
                         {e.titulo}
                       </span>
                     </span>

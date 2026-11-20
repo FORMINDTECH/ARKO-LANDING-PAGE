@@ -13,7 +13,7 @@ import MascoteAnimado from "../MascoteAnimado";
  */
 export default function HeroInicio() {
   return (
-    <section className="relative overflow-hidden pb-12 pt-28 sm:pb-28 sm:pt-40 lg:min-h-[100svh] lg:pb-24">
+    <section className="relative overflow-hidden pb-12 pt-24 sm:pb-28 sm:pt-40 lg:min-h-[100svh] lg:pb-24">
       {/* luz âmbar atrás da composição, como o brilho de LED da splash */}
       <div
         aria-hidden
@@ -21,7 +21,7 @@ export default function HeroInicio() {
       />
 
       <Container className="relative">
-        <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-4">
+        <div className="grid items-center gap-8 sm:gap-14 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-4">
           <Reveal direction="left" className="relative z-10 max-w-xl">
             {/* no celular o logo já está no cabeçalho, logo acima: aparece só a partir de 640 px */}
             <div className="hidden sm:block">
@@ -30,11 +30,11 @@ export default function HeroInicio() {
             <h1 className="sm:mt-7 text-[2.35rem] font-extrabold leading-[1.02] tracking-tight text-ink text-balance sm:text-5xl lg:text-[3.5rem]">
               Treino, dieta e evolução <span className="text-accent">no mesmo app</span>.
             </h1>
-            <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink-muted">
+            <p className="mt-5 max-w-lg text-base leading-relaxed text-ink-muted sm:mt-6 sm:text-lg">
               O ARKO organiza os seus treinos, registra o que você come e mostra a sua evolução semana a semana: carga,
               frequência e os músculos que você mais treinou.
             </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:items-center">
               <a
                 href="#escolha"
                 className="btn-accent group inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-sm font-semibold"
@@ -56,8 +56,8 @@ export default function HeroInicio() {
           <Reveal delay={150} direction="right" className="relative">
             <div className="relative mx-auto max-w-[680px] pb-[14%] pl-[24%] sm:pb-[10%] sm:pl-[10%] lg:mr-[-22%] lg:max-w-none">
               <Drift y={-24}>
-                {/* no celular, recorte com os números e a atividade dos alunos */}
-                <Browser tela="dashboard" eager recorte={{ x: 0.18, y: 0.1, w: 0.62, h: 0.6 }} />
+                {/* no celular, recorte com a atividade dos alunos (telas.ts) */}
+                <Browser tela="dashboard" eager />
               </Drift>
 
               <Drift y={36} className="absolute bottom-0 left-0 w-[34%] max-w-[230px] sm:w-[22%]">
@@ -65,7 +65,7 @@ export default function HeroInicio() {
               </Drift>
 
               {/* o mascote de óculos, encostado no canto do painel, já recebe quem chega */}
-              <Drift y={-40} className="absolute -bottom-[6%] right-0 z-10 w-[26%] max-w-[200px] sm:right-[2%] sm:w-[20%] lg:right-[24%] lg:w-[15%]">
+              <Drift y={-40} className="absolute bottom-0 right-0 sm:-bottom-[6%] z-10 w-[26%] max-w-[200px] sm:right-[2%] sm:w-[20%] lg:right-[24%] lg:w-[15%]">
                 <MascoteAnimado
                   video="/brand/mascote/oculos-brilho.webm"
                   poster="/brand/mascote/oculos-brilho.webp"
